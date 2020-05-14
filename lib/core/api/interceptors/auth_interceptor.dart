@@ -16,7 +16,6 @@ class AuthInterceptor {
   final refreshTokenSubject = GetIt.instance<BehaviorSubject<RefreshTokenResponse>>();
   final authService = GetIt.instance<AuthService>();
 
-  //is called whenever
   Future<Response> onError(Response response, body) async {
     Map<String, dynamic> data = Map<String, dynamic>();
 
@@ -37,7 +36,6 @@ class AuthInterceptor {
 
       if (isValidRefreshToken) {
         try {
-
           final headers = Map<String, String>();
 
           final refreshTokenResponse = await authRepository.refreshToken(refreshTokenRequest);
@@ -54,7 +52,7 @@ class AuthInterceptor {
           refreshTokenSubject.add(refreshTokenResponse);
 
           return httpResponse;
-        } catch (err, s){
+        } catch (e){
           return response;
         }
       }
