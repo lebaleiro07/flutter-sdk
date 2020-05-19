@@ -10,21 +10,30 @@ import 'package:music_playce_sdk/core/http/impl/music_playce_http_impl.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'core/api/interceptors/auth_interceptor.dart';
+import 'core/http/impl/music_playce_http_impl.dart';
+
 class MusicPlayceSdk {
   void registerSingletons(Environment environment) {
+    final _musicPlayceHttp = MusicPlayceHttpImpl();
+
     GetIt.instance.registerSingleton<FlutterSecureStorage>(FlutterSecureStorage());
-    GetIt.instance.registerSingleton<Environment>(environment);
-    GetIt.instance.registerSingleton<AuthService>(AuthServiceImpl(
-      authRepository: GetIt.instance<AuthRepository>()
+    GetIt.instance.registerSingleton<AuthRepository>(AuthRepositoryImpl(
+        httpClient: _musicPlayceHttp,
+        flutterSecureStorage: GetIt.instance<FlutterSecureStorage>()
     ));
+    GetIt.instance.registerSingleton<AuthService>(AuthServiceImpl(
+        authRepository: GetIt.instance<AuthRepository>()
+    ));
+    GetIt.instance.registerSingleton<Environment>(environment);
+
     GetIt.instance.registerSingleton<BehaviorSubject<RefreshTokenResponse>>(
       BehaviorSubject<RefreshTokenResponse>()
     );
-    GetIt.instance.registerSingleton<MusicPlayceHttp>(MusicPlayceHttpImpl());
-    GetIt.instance.registerSingleton<AuthRepository>(AuthRepositoryImpl(
-      httpClient: MusicPlayceHttpImpl(),
-      flutterSecureStorage: GetIt.instance<FlutterSecureStorage>()
-    ));
+
+    GetIt.instance.registerSingleton<MusicPlayceHttp>(_musicPlayceHttp);
+
+    _musicPlayceHttp.interceptors.add(AuthInterceptor());
   }
 }
 

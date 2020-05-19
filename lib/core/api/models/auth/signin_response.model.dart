@@ -18,7 +18,7 @@ class SignInResponse {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['iss'] = this.iss;
-    data['token'] = this.token;
+    data['token'] = token;
     data['refresh_token'] = this.refreshToken;
     return data;
   }

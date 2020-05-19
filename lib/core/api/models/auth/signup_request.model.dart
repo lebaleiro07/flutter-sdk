@@ -30,17 +30,17 @@ class SignUpRequest {
     acceptedMarketing = json['accepted_marketing'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  dynamic toJson() {
+    final Map<String, dynamic> data = {};
 
     data['name'] = this.name;
     data['password'] = this.password;
     data['email'] = this.email;
     data['phone'] = this.phone;
     data['device_token'] = this.deviceToken;
-    data['accepted_terms'] = this.acceptedTerms;
-    data['accepted_policy'] = this.acceptedPolicy;
-    data['accepted_marketing'] = this.acceptedMarketing;
+    data['accepted_terms'] = this.acceptedTerms.toString();
+    data['accepted_policy'] = this.acceptedPolicy.toString();
+    data['accepted_marketing'] = this.acceptedMarketing.toString();
 
     return data;
   }
