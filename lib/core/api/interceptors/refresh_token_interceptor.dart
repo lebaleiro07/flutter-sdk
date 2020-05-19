@@ -7,17 +7,19 @@ import 'package:music_playce_sdk/core/api/services/auth_service.dart';
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_request.model.dart';
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_response.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/auth_repository.dart';
+import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_interceptor_wrapper.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../http/music_playce_http.dart';
 
-class AuthInterceptor implements MusicPlayceHttpInterceptorWrapper {
+class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
   final authRepository = GetIt.instance<AuthRepository>();
   final flutterSecureStorage = GetIt.instance<fss.FlutterSecureStorage>();
   final refreshTokenSubject = GetIt.instance<BehaviorSubject<RefreshTokenResponse>>();
   final authService = GetIt.instance<AuthService>();
   final httpClient = GetIt.instance<MusicPlayceHttp>();
+  final mpHeaders = GetIt.instance<MusicPlayceHttpHeaders>();
 
   /// This method is calling whenever a request fails with
   /// with the status of 401 or 406 with the invalid
@@ -46,16 +48,13 @@ class AuthInterceptor implements MusicPlayceHttpInterceptorWrapper {
 
       if (isValidRefreshToken) {
         try {
-          final headers = Map<String, String>();
-
           final refreshTokenResponse = await authRepository.refreshToken(refreshTokenRequest);
 
-          headers["authorization"] = "Bearer ${refreshTokenResponse.token}";
+          mpHeaders.authorizationHeader = refreshTokenResponse.token;
 
           final httpResponse = await httpClient.request(
-            response.request.url.toString(),
+            response.request.url,
             method: response.request.method,
-            headers: headers,
             body: body
           );
 
