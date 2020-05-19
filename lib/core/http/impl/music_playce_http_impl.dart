@@ -1,36 +1,52 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
-import 'package:music_playce_sdk/core/api/interceptors/auth_interceptor.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
+import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
+import 'package:music_playce_sdk/core/http/music_playce_http_interceptor.dart';
+import 'package:music_playce_sdk/core/http/music_playce_http_interceptor_wrapper.dart';
+import 'package:music_playce_sdk/core/http/music_playce_http_request.dart';
 
-class MusicPlayceHttpImpl implements BaseClient, MusicPlayceHttp  {
-  final client = Client();
+class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClient, MusicPlayceHttp {
+  final _client = Client();
+  final List<MusicPlayceHttpInterceptorWrapper> _interceptors = [];
+  final _mpHeaders = GetIt.instance<MusicPlayceHttpHeaders>();
   int _lastStatusCode;
 
-  @override
-  Future<Response> request(String url, { String method, Map<String, dynamic> body, Map<String, String> headers }) async{
+  Future<Response> request(url, { String method, Map<String, String> headers, body, Encoding encoding }) async{
     try {
       Response response;
 
-      if (method == "GET") response = await client.get(url, headers: headers);
-      else if (method == "POST") response = await client.post(url, body: body, headers: headers);
-      else if (method == "PUT") response = await client.put(url, body: body,headers: headers);
-      else if (method == "DELETE") response = await client.delete(url, headers: headers);
-      else if (method == "PATH") response = await client.patch(url, body: body, headers: headers);
-      else if (method == "HEAD") response = await client.head(url, headers: headers);
+      var finalHeader = Map<String, String>();
 
-      if (response.statusCode == 401) {
-        response = await AuthInterceptor().onError(response, body);
+      if (headers != null) finalHeader = headers;
+
+      finalHeader = {
+        ...finalHeader,
+        ..._mpHeaders.headers
+      };
+
+      if (method == "GET") response = await _sendUnstreamed("GET", url, finalHeader);
+      else if (method == "POST") response = await _sendUnstreamed("POST", url, finalHeader, body, encoding);
+      else if (method == "PUT") response = await _sendUnstreamed("PUT", url, finalHeader, body, encoding);
+      else if (method == "DELETE") response = await _sendUnstreamed("DELETE", url, finalHeader);
+      else if (method == "PATH") response = await _sendUnstreamed("PATCH", url, finalHeader, body, encoding);
+      else if (method == "HEAD") response = await _sendUnstreamed("HEAD", url, finalHeader);
+
+      if (_interceptors.isNotEmpty) {
+        response = await interceptResponse(_interceptors, response, body);
       }
 
       lastStatusCode = response.statusCode;
 
-      print("Calling endpoint $url");
+      print(finalHeader);
+      print("calling endpoint $url with ${_interceptors.length} interceptors");
 
       return response;
     } catch(e, s){
+      print(e);
       print(s);
       throw e;
     }
@@ -39,7 +55,7 @@ class MusicPlayceHttpImpl implements BaseClient, MusicPlayceHttp  {
   @override
   Future<Response> delete(url, {Map<String, String> headers}) async{
     try {
-      return client.delete(url, headers: headers);
+      return request(url, method: "DELETE", headers: headers);
     } catch(e){
       throw e;
     }
@@ -66,7 +82,7 @@ class MusicPlayceHttpImpl implements BaseClient, MusicPlayceHttp  {
   @override
   Future<Response> patch(url, {Map<String, String> headers, body, Encoding encoding}) {
     try {
-      return request(url, method: "PATCH", body: body, headers: headers);
+      return request(url, method: "PATCH", body: body, headers: headers, encoding: encoding);
     } catch(e){
       throw e;
     }
@@ -75,7 +91,7 @@ class MusicPlayceHttpImpl implements BaseClient, MusicPlayceHttp  {
   @override
   Future<Response> post(url, {Map<String, String> headers, body, Encoding encoding}) {
     try {
-      return request(url, method: "POST", body: body, headers: headers);
+      return request(url, method: "POST", body: body, headers: headers, encoding: encoding);
     } catch(e){
       throw e;
     }
@@ -84,7 +100,7 @@ class MusicPlayceHttpImpl implements BaseClient, MusicPlayceHttp  {
   @override
   Future<Response> put(url, {Map<String, String> headers, body, Encoding encoding}) {
     try {
-      return request(url, method: "PUT", body: body);
+      return request(url, method: "PUT", body: body, encoding: encoding);
     } catch(e){
       throw e;
     }
@@ -92,27 +108,50 @@ class MusicPlayceHttpImpl implements BaseClient, MusicPlayceHttp  {
 
   @override
   Future<String> read(url, {Map<String, String> headers}) {
-    return client.read(url, headers: headers);
+    return _client.read(url, headers: headers);
   }
 
   @override
   Future<Uint8List> readBytes(url, {Map<String, String> headers}) {
-    return client.readBytes(url, headers: headers);
+    return _client.readBytes(url, headers: headers);
   }
 
   @override
   Future<StreamedResponse> send(BaseRequest request) {
-    return client.send(request);
+    return _client.send(request);
   }
 
-  @override
-  void close() {
-    close();
+  /// Sends a non-streaming [Request] and returns a non-streaming [Response].
+  Future<Response> _sendUnstreamed(String method, url, Map<String, dynamic> headers, [body, Encoding encoding]) async {
+    var request = MusicPlayceHttpRequest(method, _uriFromString(url));
+
+    if (headers != null) request.headers.addAll(headers);
+    if (encoding != null) request.encoding = encoding;
+
+    if (body != null) {
+      if (body is String) request.body = body;
+      else if (body is List) request.bodyBytes = body.cast<int>();
+      else if (body is Map) request.bodyFields = body.cast<String, String>();
+      else throw ArgumentError('Invalid request body "$body".');
+    }
+
+    return Response.fromStream(await send(request));
   }
+
+  /// Converts a string [uri] to a [Uri]
+  Uri _uriFromString(uri) => uri is String ? Uri.parse(uri) : uri as Uri;
 
   set lastStatusCode(int statusCode) {
     _lastStatusCode = statusCode;
   }
 
   int get lastStatusCode => _lastStatusCode;
+
+  /// Getter for interceptors
+  List<MusicPlayceHttpInterceptorWrapper> get interceptors => _interceptors;
+
+  @override
+  void close() {
+    close();
+  }
 }
