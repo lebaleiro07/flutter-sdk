@@ -13,4 +13,18 @@ class AuthEndpoint {
   static String validate(String token) => "${_env.apiHost}/v1/auth/validate/$token";
 
   static String logout(String deviceToken) => "${_env.apiHost}/v1/auth/signout?device_token=$deviceToken";
+
+  static String resendEmail = "${_env.apiHost}/v1/auth/signup/verify";
+
+  static String terms = "${_env.apiHost}/v1/auth/me/accept_terms";
+
+  static String recoverPassword = "${_env.apiHost}/v1/auth/forgot";
+
+  static String activity = "${_env.apiHost}/v1/auth/me/activity";
+
+  static String activityOff(String activityId) => "${_env.apiHost}/v1/auth/me/activity/$activityId";
+
+  static String social = "${_env.apiHost}/v1/auth/social";
+
+  static String spotifyLogin = "$social/spotify";
 }
