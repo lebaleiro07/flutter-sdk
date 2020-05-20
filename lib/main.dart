@@ -44,6 +44,4 @@ class MusicPlayceSdk {
   }
 }
 
-void main() {
-  MusicPlayceSdk().registerSingletons(Environment.dev());
-}
+void main() {}

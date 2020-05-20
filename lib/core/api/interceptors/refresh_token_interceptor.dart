@@ -40,7 +40,7 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
     final code = response.statusCode;
 
     if (code == 406 && data['error']['message'] == "Invalid token" || code == 401) {
-      final refreshTokenJson = jsonDecode(await flutterSecureStorage.read(key: "token"));
+      final refreshTokenJson = json?.decode(await flutterSecureStorage.read(key: "token"));
 
       final refreshTokenRequest = RefreshTokenRequest.fromJson(refreshTokenJson);
 
