@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+### Changed
+- Fixing nullable map in signup
+
 ## 0.2.0
 ### Added
 - Adding more auth routes
