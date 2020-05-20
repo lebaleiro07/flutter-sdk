@@ -41,7 +41,6 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
 
       lastStatusCode = response.statusCode;
 
-      print(finalHeader);
       print("calling endpoint $url with ${_interceptors.length} interceptors");
 
       return response;
