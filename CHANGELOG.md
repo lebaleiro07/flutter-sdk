@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+### Changed
+- Adding Signup route to SetToken whitelist
+
 ## 0.2.1
 ### Changed
 - Fixing nullable map in signup
