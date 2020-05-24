@@ -40,33 +40,39 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
     final code = response.statusCode;
 
     if (code == 406 && data['error']['message'] == "Invalid token" || code == 401) {
-      final refreshTokenJson = json?.decode(await flutterSecureStorage.read(key: "token"));
+      final storageToken = await flutterSecureStorage.read(key: "token");
+      
+      if (storageToken != null) {
+        final refreshTokenJson = json?.decode(storageToken);
 
-      final refreshTokenRequest = RefreshTokenRequest.fromJson(refreshTokenJson);
+        final refreshTokenRequest = RefreshTokenRequest.fromJson(refreshTokenJson);
 
-      final isValidRefreshToken = await authService.validateToken(refreshTokenRequest.refreshToken);
+        final isValidRefreshToken = await authService.validateToken(refreshTokenRequest.refreshToken);
 
-      if (isValidRefreshToken) {
-        try {
-          final refreshTokenResponse = await authRepository.refreshToken(refreshTokenRequest);
+        if (isValidRefreshToken) {
+          try {
+            final refreshTokenResponse = await authRepository.refreshToken(refreshTokenRequest);
 
-          mpHeaders.authorizationHeader = refreshTokenResponse.token;
+            mpHeaders.authorizationHeader = refreshTokenResponse.token;
 
-          final httpResponse = await httpClient.request(
-            response.request.url,
-            method: response.request.method,
-            body: body
-          );
+            final httpResponse = await httpClient.request(
+              response.request.url,
+              method: response.request.method,
+              body: body
+            );
 
-          // add the new token in a stream for notificate the listener
-          // that a new token is available
-          refreshTokenSubject.add(refreshTokenResponse);
+            // add the new token in a stream for notificate the listener
+            // that a new token is available
+            refreshTokenSubject.add(refreshTokenResponse);
 
-          return httpResponse;
-        } catch (e){
-          return response;
+            return httpResponse;
+          } catch (e){
+            return response;
+          }
         }
       }
+
+      return response;
     }
 
     return response;
