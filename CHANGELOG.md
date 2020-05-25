@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+### Changed
+- Adding validate token endpoint to RefreshTokenInterceptor blacklist
+
 ## 0.2.2
 ### Changed
 - Adding Signup route to SetToken whitelist

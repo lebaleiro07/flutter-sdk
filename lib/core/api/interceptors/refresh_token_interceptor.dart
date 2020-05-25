@@ -38,6 +38,10 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
     }
 
     final code = response.statusCode;
+    
+    final path = response.request.url.toString();
+
+    if (path.contains("/auth/validate")) return response;
 
     if (code == 406 && data['error']['message'] == "Invalid token" || code == 401) {
       final storageToken = await flutterSecureStorage.read(key: "token");
@@ -46,6 +50,7 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
         final refreshTokenJson = json?.decode(storageToken);
 
         final refreshTokenRequest = RefreshTokenRequest.fromJson(refreshTokenJson);
+
 
         final isValidRefreshToken = await authService.validateToken(refreshTokenRequest.refreshToken);
 
@@ -70,6 +75,8 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
             return response;
           }
         }
+
+        return response;
       }
 
       return response;
