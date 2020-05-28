@@ -10,6 +10,7 @@ class SignUpResponse {
   SignUpResponse({ this.iss, this.token, this.refreshToken });
 
   SignUpResponse.fromJson(Map<String, dynamic> json) {
+    print("sdk $json");
     iss = json.isNotNull ? json['iss'] : null;
     token = json.isNotNull ? json['token'] : null;
     refreshToken = json.isNotNull ? json['refresh_token'] : null;

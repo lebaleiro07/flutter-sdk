@@ -14,6 +14,7 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
   final List<MusicPlayceHttpInterceptorWrapper> _interceptors = [];
   final _mpHeaders = GetIt.instance<MusicPlayceHttpHeaders>();
   int _lastStatusCode;
+  Response _lastResponseData;
 
   Future<Response> request(url, { String method, Map<String, String> headers, body, Encoding encoding }) async{
     try {
@@ -42,6 +43,8 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
       lastStatusCode = response.statusCode;
 
       print("calling endpoint $url with ${_interceptors.length} interceptors");
+
+      lastResponseData = response;
 
       return response;
     } catch(e, s){
@@ -139,6 +142,12 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
 
   /// Converts a string [uri] to a [Uri]
   Uri _uriFromString(uri) => uri is String ? Uri.parse(uri) : uri as Uri;
+
+  set lastResponseData(Response response) {
+    _lastResponseData = response;
+  }
+
+  Response get lastResponseData => _lastResponseData;
 
   set lastStatusCode(int statusCode) {
     _lastStatusCode = statusCode;
