@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.4
+### Changed
+- Adding lastResponse in http implementation
+
 ## 0.2.3
 ### Changed
 - Adding validate token endpoint to RefreshTokenInterceptor blacklist
