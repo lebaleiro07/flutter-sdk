@@ -11,8 +11,8 @@ class PolicyTerms {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['accepted_terms'] = this.acceptedTerms;
-    data['accepted_policy'] = this.acceptedPolicy;
+    data['accepted_terms'] = this.acceptedTerms.toString();
+    data['accepted_policy'] = this.acceptedPolicy.toString();
     return data;
   }
 }

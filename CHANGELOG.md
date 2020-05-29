@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5
+### Fixed
+- Policy model cast from int to string
+
 ## 0.2.4
 ### Changed
 - Adding lastResponse in http implementation
