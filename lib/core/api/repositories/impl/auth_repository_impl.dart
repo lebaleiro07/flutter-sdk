@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/src/response.dart';
+import 'package:http/http.dart';
 import 'package:music_playce_sdk/core/api/endpoints/auth_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/auth/activity_request.model.dart';
 import 'package:music_playce_sdk/core/api/models/auth/activity_response.model.dart';

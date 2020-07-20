@@ -11,4 +11,6 @@ extension StringUtil on String {
   Uri toURI() {
     return Uri.parse(this);
   }
+
+  bool toBool() => this == "true";
 }

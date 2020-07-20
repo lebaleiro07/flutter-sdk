@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+### Added
+- Adding notification repository
+
 ## 0.2.5
 ### Fixed
 - Policy model cast from int to string

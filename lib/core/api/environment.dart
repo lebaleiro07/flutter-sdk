@@ -14,7 +14,7 @@ class Environment {
   );
 
   factory Environment.dev() => Environment(
-      apiHost: 'https://api-sandbox.musicplayce.com',
+      apiHost: 'https://api-beta.musicplayce.com',
       spotifyID: '42ffffab5b9a45289e7b6ede412b3487',
   );
 }

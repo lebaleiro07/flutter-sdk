@@ -5,6 +5,8 @@ import 'package:music_playce_sdk/core/api/interceptors/set_token_interceptor.dar
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_response.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/auth_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/impl/auth_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/impl/notification_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/notification_repository.dart';
 import 'package:music_playce_sdk/core/api/services/auth_service.dart';
 import 'package:music_playce_sdk/core/api/services/impl/auth_service_impl.dart';
 import 'package:music_playce_sdk/core/http/impl/music_playce_http_impl.dart';
@@ -29,6 +31,11 @@ class MusicPlayceSdk {
     GetIt.instance.registerSingleton<AuthService>(AuthServiceImpl(
         authRepository: GetIt.instance<AuthRepository>()
     ));
+
+    GetIt.instance.registerSingleton<NotificationRepository>(NotificationRepositoryImpl(
+        httpClient: _musicPlayceHttp
+    ));
+
     GetIt.instance.registerSingleton<Environment>(environment);
 
     GetIt.instance.registerSingleton<BehaviorSubject<RefreshTokenResponse>>(
