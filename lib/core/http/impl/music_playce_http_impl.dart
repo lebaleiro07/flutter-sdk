@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -47,6 +48,8 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
       lastResponseData = response;
 
       return response;
+    } on TimeoutException catch(e, s){
+      return Response(jsonEncode({ "data": "timeout exception" }), 408);
     } catch(e, s){
       print(e);
       print(s);
@@ -137,7 +140,8 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
       else throw ArgumentError('Invalid request body "$body".');
     }
 
-    return Response.fromStream(await send(request));
+    return Response.fromStream(await send(request)
+      .timeout(Duration(seconds: 20)));
   }
 
   /// Converts a string [uri] to a [Uri]

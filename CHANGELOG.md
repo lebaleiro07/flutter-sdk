@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.3.0+1
+### Added
+- Adding timeout to http client
+
 ## 0.3.0
 ### Added
 - Adding notification repository

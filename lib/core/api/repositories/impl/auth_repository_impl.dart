@@ -58,7 +58,9 @@ class AuthRepositoryImpl implements AuthRepository {
       body: request.toJson(),
     );
 
-    return SignUpResponse.fromJson(json?.decode(response.body)['jwt']);
+    final data = Map.from(json?.decode(response.body));
+
+    return SignUpResponse.fromJson(data['jwt']);
   }
 
   @override
