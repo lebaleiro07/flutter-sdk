@@ -39,7 +39,7 @@ class UserPlaylistsResponse {
       idPlaylist: data['_id'],
       idProfile: data['id_profile'],
       playlistName: data['name'],
-      duration: data['duration'],
+      duration: data['duration'].toInt(),
       length: data['length'],
       isEditable: data['is_editable'],
       isPublic: data['is_public'],

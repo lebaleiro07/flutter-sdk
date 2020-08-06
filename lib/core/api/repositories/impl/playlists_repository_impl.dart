@@ -6,6 +6,9 @@ import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/playlists_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 
+import '../../models/users/user_playlists_response.model.dart';
+import '../../models/users/user_playlists_response.model.dart';
+
 class PlaylistsRepositoryImpl implements PlaylistsRepository {
   final MusicPlayceHttp httpClient;
 
@@ -45,10 +48,11 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
   }
 
   @override
-  Future<bool> createPlaylist(String name) async {
+  Future<UserPlaylistsResponse> createPlaylist(String name) async {
     if (name == "Favoritas") {
-      return false;
+      return null;
     }
+
     try {
       final response = await httpClient.post(
         PlaylistEndpoint.createPlaylist,
@@ -56,11 +60,14 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
           'name': name,
         },
       );
+
+     final data = jsonDecode(response?.body)['data'];
+
       if (response.statusCode == 200) {
-        return true;
+        return UserPlaylistsResponse.fromJson(data);
       }
     } catch (e) {
-      return false;
+      return null;
     }
   }
 

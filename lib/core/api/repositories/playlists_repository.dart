@@ -2,6 +2,8 @@ import 'package:music_playce_sdk/core/api/endpoints/playlist_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/playlists/playlist_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
 
+import '../models/users/user_playlists_response.model.dart';
+
 /// The abstract class for PlaylistsRepository
 ///
 /// The subclasses need to implement his methods
@@ -43,7 +45,7 @@ abstract class PlaylistsRepository {
   /// It receive a [String] that is a [name]
   ///
   /// It returns an boolean that shows if playlist was add or not
-  Future<bool> createPlaylist(String name);
+  Future<UserPlaylistsResponse> createPlaylist(String name);
 
   /// Sends an HTTP request to the playlists endpoint in order to
   /// delete a playlist by its ID

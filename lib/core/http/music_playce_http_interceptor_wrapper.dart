@@ -6,5 +6,5 @@ abstract class MusicPlayceHttpInterceptorWrapper {
   /// response is ready
   ///
   /// All interceptors for response needs to return a [Response]
-  Future<Response> interceptResponse(Response response, Map<String, dynamic> body);
+  Future<Response> interceptResponse(Response response, body);
 }

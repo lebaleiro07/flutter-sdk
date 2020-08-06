@@ -4,6 +4,9 @@ import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model
 import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart';
 
+import '../models/cursor.dart';
+import '../models/users/user_playlists_response.model.dart';
+
 /// The abstract class for UserRepository
 ///
 /// The subclasses need to implement his methods
@@ -63,5 +66,5 @@ abstract class UserRepository {
   /// It receive a [String] that is a [userId]
   ///
   /// It returns a [UserPlaylistsResponse] object
-  Future<List<UserPlaylistsResponse>> getAllUserPlaylists(String userId);
+  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId);
 }

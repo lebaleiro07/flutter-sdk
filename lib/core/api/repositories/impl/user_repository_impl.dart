@@ -9,6 +9,11 @@ import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart'
 import 'package:music_playce_sdk/core/api/repositories/users_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 
+import '../../models/cursor.dart';
+import '../../models/cursor.dart';
+import '../../models/users/user_playlists_response.model.dart';
+import '../../models/users/user_playlists_response.model.dart';
+
 class UserRepositoryImpl implements UserRepository {
   final MusicPlayceHttp httpClient;
 
@@ -22,7 +27,7 @@ class UserRepositoryImpl implements UserRepository {
       UserEndpoint.getUser(userId),
     );
 
-    return User.fromJson(jsonDecode(response?.body)['data']);
+    return User.fromMap(jsonDecode(response?.body)['data']);
   }
 
   @override
@@ -32,7 +37,7 @@ class UserRepositoryImpl implements UserRepository {
       body: user.toJson(),
     );
 
-    return User.fromJson(jsonDecode(response?.body)['data']);
+    return User.fromMap(jsonDecode(response?.body)['data']);
   }
 
   @override
@@ -63,19 +68,26 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<List<UserPlaylistsResponse>> getAllUserPlaylists(String userId) async {
+  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId) async {
     try {
       final response =
           await httpClient.get(UserEndpoint.getAllUserPlaylists(userId));
 
       final data = jsonDecode(response?.body)['data'];
 
-      return data
+      final cursor = jsonDecode(response?.body)['cursor'];
+
+      final list = data
           .map<UserPlaylistsResponse>(
               (playlists) => UserPlaylistsResponse.fromJson(playlists))
           .toList();
-    } catch (e) {
-      print("$e");
+
+      return DataWithCursor<UserPlaylistsResponse>(
+        cursor: Cursor.fromMap(cursor),
+        data: list
+      );
+    } catch (e, s) {
+      print("$e $s");
     }
   }
 }

@@ -42,7 +42,7 @@ class PlaylistResponse {
       "type_source": typeSource,
       "length": length,
       "duration": duration,
-      "posts": posts,
+      "posts": posts != null ? posts.map((e) => e.toMap()) : null,
     };
   }
 
@@ -58,8 +58,10 @@ class PlaylistResponse {
       visible: data['visible'],
       typeSource: data['type_source'],
       length: data['length'],
-      duration: data['duration'],
-      posts: data['posts'],
+      duration: data['duration']?.toInt(),
+      posts: data['posts'] != null ? data['posts'].map<Post>((post){
+        return Post.fromMap(post);
+      }).toList() : null
     );
   }
 }
