@@ -18,5 +18,5 @@ class UserEndpoint {
       "${_env.apiHost}/v1/users/$userId/follow";
 
   static String getAllUserPlaylists(String userId) =>
-      "${_env.apiHost}/v1/users/$userId/playlists?limit=8";
+      "${_env.apiHost}/v1/users/$userId/playlists";
 }
