@@ -1,5 +1,19 @@
 # Changelog
 
+# 0.4.0+2
+### Fixed
+- Adding limit to userRepository.getAllUserPlaylists
+
+# 0.4.0+1
+### Changed
+- Upgrading get_it version
+
+# 0.4.0
+### Added
+- Adding user repository
+- Adding playlists repository
+- Fix response parsing
+
 # 0.3.0+1
 ### Added
 - Adding timeout to http client
