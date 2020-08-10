@@ -63,8 +63,9 @@ abstract class UserRepository {
   /// get all playlists from a specific user by his ID
   ///
   /// The request is made to [UserEndpoint.getAllUserPlaylists]
-  /// It receive a [String] that is a [userId]
+  /// It receive a [String] that is a [userId] and a [String]
+  /// [limit] to determine the number of results per page
   ///
   /// It returns a [UserPlaylistsResponse] object
-  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId);
+  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId, { int limit });
 }
