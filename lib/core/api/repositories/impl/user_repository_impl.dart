@@ -68,10 +68,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId, String limit) async {
+  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId, { int limit = 8 }) async {
     try {
       final response =
-          await httpClient.get("${UserEndpoint.getAllUserPlaylists(userId)}?limit=${limit="8"}");
+          await httpClient.get("${UserEndpoint.getAllUserPlaylists(userId)}?limit=$limit");
 
       final data = jsonDecode(response?.body)['data'];
 

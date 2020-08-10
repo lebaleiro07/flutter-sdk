@@ -67,5 +67,5 @@ abstract class UserRepository {
   /// [limit] to determine the number of results per page
   ///
   /// It returns a [UserPlaylistsResponse] object
-  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId, String limit);
+  Future<DataWithCursor<UserPlaylistsResponse>> getAllUserPlaylists(String userId, { int limit });
 }
