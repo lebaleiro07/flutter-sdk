@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:music_playce_sdk/core/api/endpoints/user_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_follow_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
@@ -67,5 +68,7 @@ abstract class UserRepository {
   /// [limit] to determine the number of results per page
   ///
   /// It returns a [UserPlaylists] object
-  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists(String userId, { int limit });
+  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists(String userId, { int limit = 5 });
+
+  Future<Either<Exception, List<User>>> search(String query, { int limit = 5 });
 }

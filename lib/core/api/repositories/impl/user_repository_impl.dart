@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:music_playce_sdk/core/api/endpoints/search_endpoint.dart';
 import 'package:music_playce_sdk/core/api/endpoints/user_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_follow_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart';
+import 'package:music_playce_sdk/core/api/repositories/search/search_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/users_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 
@@ -18,7 +21,7 @@ class UserRepositoryImpl implements UserRepository {
   final MusicPlayceHttp httpClient;
 
   UserRepositoryImpl({
-    @required this.httpClient,
+    @required this.httpClient
   });
 
   @override
@@ -88,6 +91,25 @@ class UserRepositoryImpl implements UserRepository {
       );
     } catch (e, s) {
       print("$e $s");
+    }
+  }
+
+  @override
+  Future<Either<Exception, List<User>>> search(String query, { int limit = 5 }) async {
+    try {
+      final response = await httpClient.get(
+        "${SearchEndpoint.search}?query=$query&limit=$limit"
+      );
+
+      final json = jsonDecode(response?.body)['data'];
+
+      final users = json.map<User>((user) => User.fromMap(user))
+        .toList();
+
+      return right(users);
+    } catch(e) {
+      print(e);
+      return left(e);
     }
   }
 }
