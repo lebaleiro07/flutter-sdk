@@ -10,6 +10,10 @@ import 'package:music_playce_sdk/core/api/repositories/impl/playlists_repository
 import 'package:music_playce_sdk/core/api/repositories/impl/user_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/notification_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/playlists_repository.dart';
+import 'package:music_playce_sdk/core/api/repositories/post/impl/post_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/post/post_repository.dart';
+import 'package:music_playce_sdk/core/api/repositories/search/impl/search_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/search/search_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/users_repository.dart';
 import 'package:music_playce_sdk/core/api/services/auth_service.dart';
 import 'package:music_playce_sdk/core/api/services/impl/auth_service_impl.dart';
@@ -38,6 +42,14 @@ class MusicPlayceSdk {
 
     GetIt.instance.registerSingleton<NotificationRepository>(NotificationRepositoryImpl(
         httpClient: _musicPlayceHttp
+    ));
+
+    GetIt.instance.registerSingleton<PostRepository>(PostRepositoryImpl(
+      _musicPlayceHttp
+    ));
+
+    GetIt.instance.registerSingleton<SearchRepository>(SearchRepositoryImpl(
+      _musicPlayceHttp
     ));
 
     GetIt.instance.registerSingleton<PlaylistsRepository>(

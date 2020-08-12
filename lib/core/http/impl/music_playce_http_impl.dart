@@ -4,11 +4,13 @@ import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/exceptions/http_exceptions.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_interceptor.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_interceptor_wrapper.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_request.dart';
+import 'package:music_playce_sdk/core/http/music_playce_http_status.dart';
 
 class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClient, MusicPlayceHttp {
   final _client = Client();
@@ -42,6 +44,29 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
       }
 
       lastStatusCode = response.statusCode;
+
+      if (lastStatusCode == MusicPlayceHttpStatus.clientError
+       || lastStatusCode == MusicPlayceHttpStatus.unauthorized){
+         throw UnauthorizedException(HttpExceptionCodes.unauthorized);
+       }
+      else if (lastStatusCode == MusicPlayceHttpStatus.paymentRequired){
+        throw PaymentRequiredException(HttpExceptionCodes.paymentRequired);
+      }
+      else if (lastStatusCode == MusicPlayceHttpStatus.forbidden){
+        throw ForbiddenException(HttpExceptionCodes.forbidden);
+      }
+      else if (lastStatusCode == MusicPlayceHttpStatus.notFound){
+        throw NotFoundException(HttpExceptionCodes.notFound);
+      }
+      else if (lastStatusCode == MusicPlayceHttpStatus.conflict){
+        throw ConflictException(HttpExceptionCodes.conflict);
+      }
+      else if (lastStatusCode == MusicPlayceHttpStatus.tooManyRequest){
+        throw TooManyRequestsException(HttpExceptionCodes.tooManyRequest);
+      }
+      else if (lastStatusCode == MusicPlayceHttpStatus.unknownError){
+        throw UnknownErrorException(HttpExceptionCodes.unknownError);
+      }
 
       print("calling endpoint $url with ${_interceptors.length} interceptors");
 
