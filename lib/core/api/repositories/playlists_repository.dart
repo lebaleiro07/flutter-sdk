@@ -61,10 +61,9 @@ abstract class PlaylistsRepository {
   /// update an existing playlist by its ID
   ///
   /// The request is made to [PlaylistEndpoint.editAPlaylist]
-  /// It receive a [String] that is a [playlistId] and an object
-  /// [UserPlaylists]
+  /// It receive an object [UserPlaylists]
   ///
   /// It returns an boolean that shows if playlist was edited or not
-  Future<bool> editAPlaylist(String playlistId, UserPlaylists userPlaylists);
+  Future<bool> editAPlaylist(UserPlaylists userPlaylists);
 
 }

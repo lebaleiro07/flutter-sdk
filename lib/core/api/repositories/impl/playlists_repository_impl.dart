@@ -86,14 +86,14 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
   }
 
   @override
-  Future<bool> editAPlaylist(String playlistId, UserPlaylists userPlaylists) async {
+  Future<bool> editAPlaylist(UserPlaylists userPlaylists) async {
 
     try {
       final response = await httpClient.put(
-        PlaylistEndpoint.editAPlaylist(playlistId),
+        PlaylistEndpoint.editAPlaylist(userPlaylists.idPlaylist),
         body: {
           'name': userPlaylists.playlistName,
-          'id_picture': userPlaylists.picture.id,
+          'picture': userPlaylists.picture,
         },
       );
 
