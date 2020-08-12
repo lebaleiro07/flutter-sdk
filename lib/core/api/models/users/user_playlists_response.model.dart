@@ -11,7 +11,6 @@ class UserPlaylists {
   bool isEditable;
   bool isPublic;
   Picture picture;
-  List<Post> posts;
 
   UserPlaylists({
     this.idPlaylist,
@@ -22,7 +21,6 @@ class UserPlaylists {
     this.isEditable,
     this.isPublic,
     this.picture,
-    this.posts,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,7 +33,6 @@ class UserPlaylists {
       "is_editable": isEditable,
       "is_public": isPublic,
       "picture": picture,
-      "posts": posts != null ? posts.map((e) => e.toMap()) : null,
     };
   }
 
@@ -49,9 +46,6 @@ class UserPlaylists {
       isEditable: data['is_editable'],
       isPublic: data['is_public'],
       picture: data['picture'],
-      posts: data['posts'] != null ? data['posts'].map<Post>((post){
-        return Post.fromMap(post);
-      }).toList() : null
     );
   }
 }
