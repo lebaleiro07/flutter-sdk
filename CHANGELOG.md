@@ -1,5 +1,13 @@
 # Changelog
 
+# 0.5.2
+### Added
+- Adding like request to post repository
+
+# 0.5.1
+### Added
+- initial version of auth repository
+
 # 0.5.0
 ### Added
 - Adding exceptions class for MusicPlayceHttp
