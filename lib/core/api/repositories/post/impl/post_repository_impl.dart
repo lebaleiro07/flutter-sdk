@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:http/src/response.dart';
 import 'package:music_playce_sdk/core/api/endpoints/post_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/cursor.dart';
 import 'package:music_playce_sdk/core/api/models/posts/indication.model.dart';
+import 'package:music_playce_sdk/core/api/models/posts/like.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/post/post_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
@@ -50,6 +52,35 @@ class PostRepositoryImpl implements PostRepository {
       final json = jsonDecode(response?.body)['data'];
 
       return right(Indication?.fromJson(json));
+    } catch(e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Like>> like(String postId) async{
+    try {
+      final response = await _httpClient.post(PostEndpoint.like(postId));
+      final body = jsonDecode(response?.body)['data'];
+
+      if (body == null) {
+        return null;
+      }
+
+      return right(Like.fromMap(body));
+    } catch(e) {
+      print(e);
+      return left(e);
+    }
+  }
+  
+  @override
+  Future<Either<Exception, Response>> dislike(String postId) async {
+
+    try {
+      final response = await _httpClient.delete(PostEndpoint.like(postId));
+
+      return right(response);
     } catch(e) {
       return left(e);
     }

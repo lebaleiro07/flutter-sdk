@@ -1,5 +1,19 @@
 # Changelog
 
+# 0.5.2
+### Added
+- Adding like request to post repository
+
+# 0.5.1
+### Added
+- initial version of auth repository
+
+# 0.5.0
+### Added
+- Adding exceptions class for MusicPlayceHttp
+- Adding initial version of post repository
+- Adding search repository
+
 # 0.4.0+2
 ### Fixed
 - Adding limit to userRepository.getAllUserPlaylists
