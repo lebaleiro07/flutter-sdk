@@ -1,5 +1,6 @@
 import 'package:music_playce_sdk/core/api/endpoints/playlist_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/playlists/playlist_response.model.dart';
+import 'package:music_playce_sdk/core/api/models/posts/picture.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
 
 import '../models/users/user_playlists_response.model.dart';
@@ -45,7 +46,7 @@ abstract class PlaylistsRepository {
   /// It receive a [String] that is a [name]
   ///
   /// It returns an boolean that shows if playlist was add or not
-  Future<UserPlaylistsResponse> createPlaylist(String name);
+  Future<UserPlaylists> createPlaylist(String name);
 
   /// Sends an HTTP request to the playlists endpoint in order to
   /// delete a playlist by its ID
@@ -55,4 +56,15 @@ abstract class PlaylistsRepository {
   ///
   /// It returns an boolean that shows if playlist was deleted or not
   Future<bool> deleteAPlaylist(String playlistId);
+
+  /// Sends an HTTP request to the playlists endpoint in order to
+  /// update an existing playlist by its ID
+  ///
+  /// The request is made to [PlaylistEndpoint.editAPlaylist]
+  /// It receive a [String] that is a [playlistId] and an object
+  /// [UserPlaylists]
+  ///
+  /// It returns an boolean that shows if playlist was edited or not
+  Future<bool> editAPlaylist(String playlistId, UserPlaylists userPlaylists);
+
 }

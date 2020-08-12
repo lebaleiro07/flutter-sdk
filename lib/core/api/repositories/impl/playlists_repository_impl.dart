@@ -48,7 +48,7 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
   }
 
   @override
-  Future<UserPlaylistsResponse> createPlaylist(String name) async {
+  Future<UserPlaylists> createPlaylist(String name) async {
     if (name == "Favoritas") {
       return null;
     }
@@ -64,7 +64,7 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
      final data = jsonDecode(response?.body)['data'];
 
       if (response.statusCode == 200) {
-        return UserPlaylistsResponse.fromJson(data);
+        return UserPlaylists.fromJson(data);
       }
     } catch (e) {
       return null;
@@ -77,6 +77,26 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
       final response = await httpClient.delete(
         PlaylistEndpoint.deleteAPlaylist(playlistId),
       );
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> editAPlaylist(String playlistId, UserPlaylists userPlaylists) async {
+
+    try {
+      final response = await httpClient.put(
+        PlaylistEndpoint.editAPlaylist(playlistId),
+        body: {
+          'name': userPlaylists.playlistName,
+          'id_picture': userPlaylists.picture.id,
+        },
+      );
+
       if (response.statusCode == 200) {
         return true;
       }

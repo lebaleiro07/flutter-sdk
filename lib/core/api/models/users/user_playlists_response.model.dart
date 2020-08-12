@@ -1,6 +1,6 @@
 import 'package:music_playce_sdk/core/api/models/posts/picture.model.dart';
 
-class UserPlaylistsResponse {
+class UserPlaylists {
   String idPlaylist;
   String idProfile;
   String playlistName;
@@ -10,7 +10,7 @@ class UserPlaylistsResponse {
   bool isPublic;
   Picture picture;
 
-  UserPlaylistsResponse({
+  UserPlaylists({
     this.idPlaylist,
     this.idProfile,
     this.playlistName,
@@ -34,8 +34,8 @@ class UserPlaylistsResponse {
     };
   }
 
-  factory UserPlaylistsResponse.fromJson(dynamic data) {
-    return UserPlaylistsResponse(
+  factory UserPlaylists.fromJson(dynamic data) {
+    return UserPlaylists(
       idPlaylist: data['_id'],
       idProfile: data['id_profile'],
       playlistName: data['name'],
