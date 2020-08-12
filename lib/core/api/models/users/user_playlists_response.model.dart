@@ -1,5 +1,7 @@
 import 'package:music_playce_sdk/core/api/models/posts/picture.model.dart';
 
+import '../posts/posts.model.dart';
+
 class UserPlaylists {
   String idPlaylist;
   String idProfile;
@@ -9,6 +11,7 @@ class UserPlaylists {
   bool isEditable;
   bool isPublic;
   Picture picture;
+  List<Post> posts;
 
   UserPlaylists({
     this.idPlaylist,
@@ -19,6 +22,7 @@ class UserPlaylists {
     this.isEditable,
     this.isPublic,
     this.picture,
+    this.posts,
   });
 
   Map<String, dynamic> toJson() {
@@ -30,7 +34,8 @@ class UserPlaylists {
       "length": length,
       "is_editable": isEditable,
       "is_public": isPublic,
-      "picture": picture
+      "picture": picture,
+      "posts": posts != null ? posts.map((e) => e.toMap()) : null,
     };
   }
 
@@ -44,6 +49,9 @@ class UserPlaylists {
       isEditable: data['is_editable'],
       isPublic: data['is_public'],
       picture: data['picture'],
+      posts: data['posts'] != null ? data['posts'].map<Post>((post){
+        return Post.fromMap(post);
+      }).toList() : null
     );
   }
 }
