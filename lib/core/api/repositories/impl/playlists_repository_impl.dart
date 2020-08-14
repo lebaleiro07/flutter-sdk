@@ -48,9 +48,9 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
   }
 
   @override
-  Future<UserPlaylists> createPlaylist(String name) async {
+  Future<bool> createPlaylist(String name) async {
     if (name == "Favoritas") {
-      return null;
+      return false;
     }
 
     try {
@@ -61,13 +61,11 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
         },
       );
 
-     final data = jsonDecode(response?.body)['data'];
-
       if (response.statusCode == 200) {
-        return UserPlaylists.fromJson(data);
+        return true;
       }
     } catch (e) {
-      return null;
+      return false;
     }
   }
 
