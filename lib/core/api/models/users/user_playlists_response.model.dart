@@ -11,6 +11,7 @@ class UserPlaylists {
   bool isEditable;
   bool isPublic;
   Picture picture;
+  String typeSource;
 
   UserPlaylists({
     this.idPlaylist,
@@ -21,6 +22,7 @@ class UserPlaylists {
     this.isEditable,
     this.isPublic,
     this.picture,
+    this.typeSource,
   });
 
   factory UserPlaylists.fromJson(String str) =>
@@ -38,6 +40,7 @@ class UserPlaylists {
         isEditable: json['is_editable'] == null ? null : json['is_editable'],
         isPublic: json['is_public'] == null ? null : json['is_public'],
         picture: json['picture'] == null ? null : json['picture'],
+        typeSource: json['type_source'] == null ? null : json['type_source'],
       );
 
   Map<String, dynamic> toMap() => {
@@ -49,6 +52,7 @@ class UserPlaylists {
         "is_editable": isEditable == null ? null : isEditable,
         "is_public": isPublic == null ? null : isPublic,
         "picture": picture == null ? null : picture,
+        "type_source": typeSource == null ? null : typeSource,
       };
 
 }
