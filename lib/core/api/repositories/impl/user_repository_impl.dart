@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:music_playce_sdk/core/api/endpoints/search_endpoint.dart';
 import 'package:music_playce_sdk/core/api/endpoints/user_endpoint.dart';
+import 'package:music_playce_sdk/core/api/models/users/term.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_follow_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
@@ -111,5 +112,72 @@ class UserRepositoryImpl implements UserRepository {
       print(e);
       return left(e);
     }
+  }
+
+  @override
+  Future<Either<Exception, dynamic>> checkEmail(String email) async{
+    try {
+      final response = await httpClient.post(UserEndpoint.checkEmail, body: {
+        "email": email
+      });
+
+      final data = jsonDecode(response?.body)['data'];
+
+      return right(data);
+    } catch(e, s) {
+      print("$e $s");
+      return left(e);
+    }
+  }
+  
+  @override
+  Future<Either<Exception, dynamic>> checkPhone(String phone) async{
+    try {
+      final response = await httpClient.post(UserEndpoint.checkPhone, body: {
+        "phone": phone
+      });
+
+      final data = jsonDecode(response?.body)['data'];
+
+      return right(data);
+    } catch(e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Term>> getTerm(String name) async {
+    try {
+      final response = await httpClient.get(UserEndpoint.getTerm(name));
+
+      final data = jsonDecode(response?.body)['data'];
+
+      final term = Term.fromJson(data);
+
+      return right(term);
+    } catch(e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, List<Term>>> getAllTerms() async {
+    final List<Term> terms = [];
+
+    final endUserAgreement = await getTerm('end-user-agreement');
+
+    endUserAgreement.fold(
+      (err) => left(err),
+      (success) => terms.add(success)
+    );
+
+    final privacyPolicy = await getTerm('privacy-policy');
+
+    privacyPolicy.fold(
+      (err) => left(err),
+      (success) => terms.add(success)
+    );
+
+    return right(terms);
   }
 }

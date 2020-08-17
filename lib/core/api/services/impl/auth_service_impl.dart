@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:music_playce_sdk/core/api/repositories/auth_repository.dart';
+import 'package:music_playce_sdk/core/api/repositories/v3/auth/auth_repository.dart';
 import 'package:music_playce_sdk/core/api/services/auth_service.dart';
 
 class AuthServiceImpl implements AuthService {

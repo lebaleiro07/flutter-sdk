@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/exceptions/http/bad_request_exception.dart';
 import 'package:music_playce_sdk/core/api/exceptions/http_exceptions.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
@@ -45,27 +46,31 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
 
       lastStatusCode = response.statusCode;
 
-      if (lastStatusCode == MusicPlayceHttpStatus.clientError
+      if (lastStatusCode == MusicPlayceHttpStatus.badRequest) {
+        throw BadRequestException(HttpExceptionCodes.badRequest, json: jsonDecode(response?.body));
+      } else if (lastStatusCode == MusicPlayceHttpStatus.clientError
        || lastStatusCode == MusicPlayceHttpStatus.unauthorized){
-         throw UnauthorizedException(HttpExceptionCodes.unauthorized);
+         throw UnauthorizedException(HttpExceptionCodes.unauthorized, json: jsonDecode(response?.body));
        }
       else if (lastStatusCode == MusicPlayceHttpStatus.paymentRequired){
-        throw PaymentRequiredException(HttpExceptionCodes.paymentRequired);
+        throw PaymentRequiredException(HttpExceptionCodes.paymentRequired, json: jsonDecode(response?.body));
       }
       else if (lastStatusCode == MusicPlayceHttpStatus.forbidden){
-        throw ForbiddenException(HttpExceptionCodes.forbidden);
+        throw ForbiddenException(HttpExceptionCodes.forbidden, json: jsonDecode(response?.body));
       }
       else if (lastStatusCode == MusicPlayceHttpStatus.notFound){
-        throw NotFoundException(HttpExceptionCodes.notFound);
+        throw NotFoundException(HttpExceptionCodes.notFound, json: jsonDecode(response?.body));
       }
       else if (lastStatusCode == MusicPlayceHttpStatus.conflict){
-        throw ConflictException(HttpExceptionCodes.conflict);
+        throw ConflictException(HttpExceptionCodes.conflict, json: jsonDecode(response?.body));
       }
       else if (lastStatusCode == MusicPlayceHttpStatus.tooManyRequest){
-        throw TooManyRequestsException(HttpExceptionCodes.tooManyRequest);
+        throw TooManyRequestsException(HttpExceptionCodes.tooManyRequest, json: jsonDecode(response?.body));
       }
       else if (lastStatusCode == MusicPlayceHttpStatus.unknownError){
-        throw UnknownErrorException(HttpExceptionCodes.unknownError);
+        throw UnknownErrorException(HttpExceptionCodes.unknownError, json: jsonDecode(response?.body));
+      } else if (lastStatusCode == MusicPlayceHttpStatus.unprocessableEntity) {
+        throw UnprocessableEntityException(HttpExceptionCodes.unprocessableEntity, json: jsonDecode(response?.body));
       }
 
       print("calling endpoint $url with ${_interceptors.length} interceptors");
@@ -161,7 +166,7 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor implements BaseClie
     if (body != null) {
       if (body is String) request.body = body;
       else if (body is List) request.bodyBytes = body.cast<int>();
-      else if (body is Map) request.bodyFields = body.cast<String, String>();
+      else if (body is Map) request.bodyFields = body.cast<String, dynamic>();
       else throw ArgumentError('Invalid request body "$body".');
     }
 

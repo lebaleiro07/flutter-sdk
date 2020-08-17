@@ -8,7 +8,7 @@ class MusicPlayceHttpRequest extends Request {
   MusicPlayceHttpRequest(String method, Uri url) : super(method, url);
 
   @override
-  set bodyFields(Map<String, String> fields) {
+  set bodyFields(Map<String, dynamic> fields) {
     var contentType = _contentType;
     if (contentType == null) {
       _contentType = MediaType('application', 'x-www-form-urlencoded');
@@ -31,14 +31,16 @@ class MusicPlayceHttpRequest extends Request {
     headers['content-type'] = value.toString();
   }
 
-  String _mapToQuery(Map<String, String> map, {Encoding encoding}) {
-    var pairs = <List<String>>[];
+  String _mapToQuery(Map<String, dynamic> map, {Encoding encoding}) {
+    var pairs = <List<dynamic>>[];
 
     map.forEach((key, value) {
       if (value != null) {
+        final parsedValue = value is bool ? value.toString() : value;
+
         pairs.add([
           Uri.encodeQueryComponent(key, encoding: encoding),
-          Uri.encodeQueryComponent(value, encoding: encoding)
+          Uri.encodeQueryComponent(parsedValue, encoding: encoding)
         ]);
       }
     });

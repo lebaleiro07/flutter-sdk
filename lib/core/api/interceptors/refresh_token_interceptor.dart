@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as fss;
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/endpoints/v3/auth_endpoint.dart';
 import 'package:music_playce_sdk/core/api/services/auth_service.dart';
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_request.model.dart';
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_response.model.dart';
-import 'package:music_playce_sdk/core/api/repositories/auth_repository.dart';
+import 'package:music_playce_sdk/core/api/repositories/v3/auth/auth_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_interceptor_wrapper.dart';
+import 'package:music_playce_sdk/core/utils/string_util.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../http/music_playce_http.dart';
@@ -37,11 +39,14 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
       data = {};
     }
 
+    print(data);
+
     final code = response.statusCode;
     
     final path = response.request.url.toString();
 
-    if (path.contains("/auth/validate")) return response;
+    if (path.contains("/auth/validate") 
+      || _disallowedRoutes.contains(response.request.url)) return response;
 
     if (code == 406 && data['error']['message'] == "Invalid token" || code == 401) {
       final storageToken = await flutterSecureStorage.read(key: "token");
@@ -84,4 +89,9 @@ class RefreshTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
 
     return response;
   }
+
+  List<Uri> _disallowedRoutes = [
+    AuthEndpoint.signin.toURI(),
+    AuthEndpoint.signup.toURI(),
+  ];
 }

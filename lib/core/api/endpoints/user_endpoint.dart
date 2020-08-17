@@ -19,4 +19,10 @@ class UserEndpoint {
 
   static String getAllUserPlaylists(String userId) =>
       "${_env.apiHost}/v1/users/$userId/playlists";
+
+  static String checkEmail = "${_env.apiHost}/v2/users/check-email";
+
+  static String checkPhone = "${_env.apiHost}/v2/users/check-phone";
+
+  static String getTerm(String name) => "${_env.apiHost}/v1/terms/$name";
 }

@@ -8,13 +8,7 @@ class AuthEndpoint {
 
   static String signup = "${_env.apiHost}/v3/auth/register";
 
-  static String checkEmail = "${_env.apiHost}/v3/auth/check-email";
-
-  static String checkPhone = "${_env.apiHost}/v3/auth/check-phone";
-
-  static String checkUsername = "${_env.apiHost}/v3/auth/check-username";
-
-  static String confirm = "${_env.apiHost}/v3/auth/confirm-email";
+  static String confirm(String code) => "${_env.apiHost}/v3/auth/confirmation/$code";
 
   static String refresh = "${_env.apiHost}/v2/auth/refresh";
 
@@ -27,4 +21,6 @@ class AuthEndpoint {
   static String activity = "${_env.apiHost}/v1/auth/me/activity";
 
   static String activityOff(String activityId) => "${_env.apiHost}/v1/auth/me/activity/$activityId";
+
+  static String resendConfirmation = "${_env.apiHost}/v3/auth/resend-confirmation";
 }
