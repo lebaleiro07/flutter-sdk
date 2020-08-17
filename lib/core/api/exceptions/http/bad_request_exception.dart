@@ -1,9 +1,9 @@
 import 'package:music_playce_sdk/core/api/exceptions/http/music_playce_http_exception.dart';
 
-class ForbiddenException extends MusicPlayceException {
+class BadRequestException extends MusicPlayceException {
   final String message;
 
-  const ForbiddenException(this.message, { dynamic json }) : super(message,
+  const BadRequestException(this.message, { dynamic json }) : super(message,
     json: json
   );
 
