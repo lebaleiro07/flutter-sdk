@@ -10,6 +10,9 @@ class PlaylistEndpoint {
   static String addAPostToPlaylist(String playlistId) =>
       "${_env.apiHost}/v1/playlists/$playlistId";
 
+  static String editAPlaylist(String playlistId) =>
+      "${_env.apiHost}/v1/playlists/$playlistId";
+
   static String deleteAPostFromAPlaylist(String playlistId, String postId) =>
       "${_env.apiHost}/v1/playlists/$playlistId/$postId";
 
