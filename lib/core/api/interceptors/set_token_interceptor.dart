@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
-import 'package:music_playce_sdk/core/api/endpoints/auth_endpoint.dart';
+import 'package:music_playce_sdk/core/api/endpoints/v3/auth_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/auth/signin_response.model.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_interceptor_wrapper.dart';
@@ -27,7 +27,6 @@ class SetTokenInterceptor implements MusicPlayceHttpInterceptorWrapper {
   }
 
   List<Uri> _allowedRoutes = [
-    AuthEndpoint.spotifyLogin.toURI(),
     AuthEndpoint.signin.toURI(),
     AuthEndpoint.signup.toURI()
   ];

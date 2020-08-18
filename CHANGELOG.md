@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.6.0
+### Added
+- Improving exceptions class by accepting code from backend
+- Integrating the authentication repository with the v3 api
+
 # 0.5.2
 ### Added
 - Adding like request to post repository

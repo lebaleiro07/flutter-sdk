@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:music_playce_sdk/core/api/endpoints/user_endpoint.dart';
+import 'package:music_playce_sdk/core/api/models/users/term.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_follow_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
@@ -71,4 +72,12 @@ abstract class UserRepository {
   Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({String userId, String page, int limit = 5 });
 
   Future<Either<Exception, List<User>>> search(String query, { int limit = 5 });
+
+  Future<Either<Exception, dynamic>> checkEmail(String email);
+
+  Future<Either<Exception, dynamic>> checkPhone(String phone);
+
+  Future<Either<Exception, Term>> getTerm(String name);
+
+  Future<Either<Exception, List<Term>>> getAllTerms();
 }
