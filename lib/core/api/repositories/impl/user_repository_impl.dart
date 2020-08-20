@@ -39,7 +39,13 @@ class UserRepositoryImpl implements UserRepository {
   Future<UserUpdateResponse> updateUser(User user) async {
     final response = await httpClient.put(
       UserEndpoint.updateUser(user.id),
-      body: user.toJson(),
+      body: {
+        "name": user.name,
+        "picture_cover": user.pictureCover,
+        "picture_profile": user.pictureProfile,
+        "location": user.location,
+        "description": user.description,
+      }
     );
 
     return UserUpdateResponse.fromMap(jsonDecode(response?.body)['data']);
