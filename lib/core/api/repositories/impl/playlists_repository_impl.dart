@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:music_playce_sdk/core/api/endpoints/playlist_endpoint.dart';
-import 'package:music_playce_sdk/core/api/models/playlists/playlist_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
-import 'package:music_playce_sdk/core/api/repositories/playlists_repository.dart';
-import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 
+import 'package:flutter/material.dart';
+
+import '../../../http/music_playce_http.dart';
+import '../../endpoints/playlist_endpoint.dart';
+import '../../models/playlists/playlist_response.model.dart';
+import '../../models/posts/posts.model.dart';
 import '../../models/users/user_playlists_response.model.dart';
-import '../../models/users/user_playlists_response.model.dart';
+import '../playlists_repository.dart';
 
 class PlaylistsRepositoryImpl implements PlaylistsRepository {
   final MusicPlayceHttp httpClient;
@@ -85,7 +85,6 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
 
   @override
   Future<bool> editAPlaylist(UserPlaylists userPlaylists) async {
-
     try {
       final response = await httpClient.put(
         PlaylistEndpoint.editAPlaylist(userPlaylists.idPlaylist),

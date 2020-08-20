@@ -24,8 +24,12 @@ class SignUpRequest {
     email = json['email'] != null ? json['email'] : null;
     password = json['password'] != null ? json['password'] : null;
     phone = json['phone'] != null ? json['phone'] : null;
-    acceptedTerms = json['acceptedTerms'] is bool ? json['acceptedTerms'] : (json['acceptedTerms'] as String).toBool();
-    acceptedPolicy = json['acceptedPolicy'] is bool ? json['acceptedPolicy'] : (json['acceptedPolicy'] as String).toBool();
+    acceptedTerms = json['acceptedTerms'] is bool
+        ? json['acceptedTerms']
+        : (json['acceptedTerms'] as String).toBool();
+    acceptedPolicy = json['acceptedPolicy'] is bool
+        ? json['acceptedPolicy']
+        : (json['acceptedPolicy'] as String).toBool();
   }
 
   Map<String, dynamic> toJson() {

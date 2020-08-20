@@ -1,7 +1,7 @@
 class ValidateTokenResponse {
   String message;
 
-  ValidateTokenResponse({ this.message });
+  ValidateTokenResponse({this.message});
 
   ValidateTokenResponse.fromJson(Map<String, dynamic> json) {
     message = json['message'];

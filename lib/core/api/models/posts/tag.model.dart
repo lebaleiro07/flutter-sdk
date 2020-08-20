@@ -18,16 +18,16 @@ class Tag {
   String toJson() => json.encode(toMap());
 
   factory Tag.fromMap(Map<String, dynamic> json) => Tag(
-    id: json["_id"] == null ? null : json["_id"],
-    name: json["name"] == null ? null : json["name"],
-    color: json['color'] == null ? null : HexColor(json['color']),
-  );
+        id: json["_id"] == null ? null : json["_id"],
+        name: json["name"] == null ? null : json["name"],
+        color: json['color'] == null ? null : HexColor(json['color']),
+      );
 
   Map<String, dynamic> toMap() => {
-    "_id": id == null ? null : id,
-    "name": name == null ? null : name,
-    'color': color == null ? null : '#${color.value.toRadixString(16)}',
-  };
+        "_id": id == null ? null : id,
+        "name": name == null ? null : name,
+        'color': color == null ? null : '#${color.value.toRadixString(16)}',
+      };
 }
 
 class HexColor extends Color {

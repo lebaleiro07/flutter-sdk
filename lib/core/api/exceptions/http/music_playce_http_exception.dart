@@ -2,7 +2,7 @@ abstract class MusicPlayceException implements Exception {
   final String message;
   final dynamic json;
 
-  const MusicPlayceException(this.message, { dynamic json }) : json = json;
+  const MusicPlayceException(this.message, {dynamic json}) : json = json;
 
   String get _parsedCode {
     print(json);

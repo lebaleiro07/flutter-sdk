@@ -1,8 +1,6 @@
-import 'package:music_playce_sdk/core/api/endpoints/playlist_endpoint.dart';
-import 'package:music_playce_sdk/core/api/models/playlists/playlist_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/posts/picture.model.dart';
-import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
-
+import '../endpoints/playlist_endpoint.dart';
+import '../models/playlists/playlist_response.model.dart';
+import '../models/posts/posts.model.dart';
 import '../models/users/user_playlists_response.model.dart';
 
 /// The abstract class for PlaylistsRepository
@@ -65,5 +63,4 @@ abstract class PlaylistsRepository {
   ///
   /// It returns an boolean that shows if playlist was edited or not
   Future<bool> editAPlaylist(UserPlaylists userPlaylists);
-
 }

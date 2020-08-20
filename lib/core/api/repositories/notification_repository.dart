@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:http/http.dart';
-import 'package:music_playce_sdk/core/api/models/cursor.dart';
-import 'package:music_playce_sdk/core/api/models/notification/notification.dart';
+
+import '../models/cursor.dart';
+import '../models/notification/notification.dart';
 
 /// Abstract class that defines a [NotificationRepository]
 abstract class NotificationRepository {
@@ -19,7 +20,8 @@ abstract class NotificationRepository {
   /// the [CentralNotification] object with the updated data
   /// It returns a [CentralNotification] object, that is the
   /// updated object
-  Future<CentralNotification> update(String notificationId, CentralNotification notification);
+  Future<CentralNotification> update(
+      String notificationId, CentralNotification notification);
 
   /// Fetch all notifications
   ///
@@ -36,5 +38,6 @@ abstract class NotificationRepository {
   /// a [String] that is the [cursor] for the next page
   /// It returns a [DataWithCursor] with a [Cursor] and
   /// a [CentralNotification] object
-  Future<DataWithCursor<CentralNotification>> getById(String notificationId, { int page = 8, String cursor });
+  Future<DataWithCursor<CentralNotification>> getById(String notificationId,
+      {int page = 8, String cursor});
 }

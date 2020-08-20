@@ -3,36 +3,33 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
-import 'package:music_playce_sdk/core/api/endpoints/auth_endpoint.dart';
-import 'package:music_playce_sdk/core/api/models/auth/activity_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/activity_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/auth_credentials.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/forgot_password_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/policy_terms.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/refresh_token_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/refresh_token_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signin_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signout_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signup_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signup_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/spotify_login_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/validate_token_response.model.dart';
-import 'package:music_playce_sdk/core/api/repositories/auth_repository.dart';
-import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 
+import '../../../http/music_playce_http.dart';
 import '../../endpoints/auth_endpoint.dart';
+import '../../models/auth/activity_request.model.dart';
+import '../../models/auth/activity_response.model.dart';
+import '../../models/auth/auth_credentials.model.dart';
+import '../../models/auth/forgot_password_request.model.dart';
+import '../../models/auth/policy_terms.model.dart';
+import '../../models/auth/refresh_token_request.model.dart';
+import '../../models/auth/refresh_token_response.model.dart';
+import '../../models/auth/signin_response.model.dart';
+import '../../models/auth/signout_response.model.dart';
+import '../../models/auth/signup_request.model.dart';
+import '../../models/auth/signup_response.model.dart';
+import '../../models/auth/spotify_login_request.model.dart';
+import '../../models/auth/validate_token_response.model.dart';
+import '../auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final MusicPlayceHttp httpClient;
   final FlutterSecureStorage flutterSecureStorage;
 
-  AuthRepositoryImpl({
-    @required this.httpClient,
-    @required this.flutterSecureStorage
-  });
+  AuthRepositoryImpl(
+      {@required this.httpClient, @required this.flutterSecureStorage});
 
   @override
-  Future<SignInResponse> signin(AuthCredentials credentials) async{
+  Future<SignInResponse> signin(AuthCredentials credentials) async {
     final response = await httpClient.post(
       AuthEndpoint.signin,
       body: credentials.toJSON(),
@@ -42,7 +39,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<RefreshTokenResponse> refreshToken(RefreshTokenRequest request) async{
+  Future<RefreshTokenResponse> refreshToken(RefreshTokenRequest request) async {
     final response = await httpClient.post(
       AuthEndpoint.refresh,
       body: request.toJson(),
@@ -52,7 +49,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<SignUpResponse> signup(SignUpRequest request) async{
+  Future<SignUpResponse> signup(SignUpRequest request) async {
     final response = await httpClient.post(
       AuthEndpoint.signup,
       body: request.toJson(),
@@ -64,7 +61,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<ValidateTokenResponse> validateToken(String token) async{
+  Future<ValidateTokenResponse> validateToken(String token) async {
     final response = await httpClient.get(
       AuthEndpoint.validate(token),
     );
@@ -74,11 +71,12 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> storeToken(RefreshTokenResponse refreshTokenResponse) {
-    return flutterSecureStorage.write(key: "token", value: jsonEncode(refreshTokenResponse.toJson()));
+    return flutterSecureStorage.write(
+        key: "token", value: jsonEncode(refreshTokenResponse.toJson()));
   }
 
   @override
-  Future<SignOutResponse> logout(String deviceToken) async{
+  Future<SignOutResponse> logout(String deviceToken) async {
     final response = await httpClient.get(
       AuthEndpoint.logout(deviceToken),
     );
@@ -87,26 +85,25 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Response> reSendEmailConfirmation() async{
+  Future<Response> reSendEmailConfirmation() async {
     return await httpClient.post(
       AuthEndpoint.resendEmail,
     );
   }
 
   Future<Response> acceptTerms(PolicyTerms policyTerms) async {
-    return await httpClient.post(
-      AuthEndpoint.terms,
-      body: policyTerms.toJson()
-    );
+    return await httpClient.post(AuthEndpoint.terms,
+        body: policyTerms.toJson());
   }
 
   @override
-  Future<Response> forgotPassword(RecoverPasswordRequest request) async{
-    return await httpClient.post(AuthEndpoint.recoverPassword, body: request.toJson());
+  Future<Response> forgotPassword(RecoverPasswordRequest request) async {
+    return await httpClient.post(AuthEndpoint.recoverPassword,
+        body: request.toJson());
   }
 
   @override
-  Future<ActivityResponse> activityOn() async{
+  Future<ActivityResponse> activityOn() async {
     final response = await httpClient.post(AuthEndpoint.activity);
 
     return ActivityResponse.fromJson(json?.decode(response.body)['data']);
@@ -118,11 +115,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<SignInResponse> spotifyLogin(SpotifyLoginRequest request) async{
-    final response = await httpClient.post(
-      AuthEndpoint.spotifyLogin,
-      body: request.toJson()
-    );
+  Future<SignInResponse> spotifyLogin(SpotifyLoginRequest request) async {
+    final response = await httpClient.post(AuthEndpoint.spotifyLogin,
+        body: request.toJson());
 
     return SignInResponse.fromJson(json?.decode(response.body)['jwt']);
   }

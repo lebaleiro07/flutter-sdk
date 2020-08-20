@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:music_playce_sdk/core/api/environment.dart';
+
+import '../environment.dart';
 
 class PlaylistEndpoint {
   static final _env = GetIt.instance<Environment>();

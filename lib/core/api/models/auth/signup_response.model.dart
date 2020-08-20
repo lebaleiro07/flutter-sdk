@@ -1,5 +1,5 @@
-import 'package:music_playce_sdk/core/api/models/auth/auth_extra_body.model.dart';
-import 'package:music_playce_sdk/core/utils/map_utils.dart';
+import '../../../utils/map_utils.dart';
+import 'auth_extra_body.model.dart';
 
 class SignUpResponse {
   String iss;
@@ -7,7 +7,7 @@ class SignUpResponse {
   String refreshToken;
   AuthExtraBody authExtraBody;
 
-  SignUpResponse({ this.iss, this.token, this.refreshToken });
+  SignUpResponse({this.iss, this.token, this.refreshToken});
 
   SignUpResponse.fromJson(Map<String, dynamic> json) {
     print("sdk $json");

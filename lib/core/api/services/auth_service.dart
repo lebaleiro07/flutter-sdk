@@ -1,5 +1,4 @@
-
-import 'package:music_playce_sdk/core/api/repositories/auth_repository.dart';
+import '../repositories/auth_repository.dart';
 
 /// The abstract class for AuthService
 ///

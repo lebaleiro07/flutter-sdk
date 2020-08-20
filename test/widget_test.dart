@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:music_playce_sdk/main.dart';
 
 void main() {
-  test('Just pass that sh*t', (){
+  test('Just pass that sh*t', () {
     expect(1, 1);
   });
 }

@@ -1,4 +1,4 @@
-import 'package:music_playce_sdk/core/api/models/posts/posts.model.dart';
+import '../posts/posts.model.dart';
 
 class PlaylistResponse {
   String idPlaylist;
@@ -48,20 +48,21 @@ class PlaylistResponse {
 
   factory PlaylistResponse.fromJson(dynamic data) {
     return PlaylistResponse(
-      idPlaylist: data['_id'],
-      idProfile: data['id_profile'],
-      playlistName: data['name'],
-      description: data['description'],
-      idPicture: data['id_picture'],
-      isPublic: data['is_public'],
-      isEditable: data['is_editable'],
-      visible: data['visible'],
-      typeSource: data['type_source'],
-      length: data['length'],
-      duration: data['duration']?.toInt(),
-      posts: data['posts'] != null ? data['posts'].map<Post>((post){
-        return Post.fromMap(post);
-      }).toList() : null
-    );
+        idPlaylist: data['_id'],
+        idProfile: data['id_profile'],
+        playlistName: data['name'],
+        description: data['description'],
+        idPicture: data['id_picture'],
+        isPublic: data['is_public'],
+        isEditable: data['is_editable'],
+        visible: data['visible'],
+        typeSource: data['type_source'],
+        length: data['length'],
+        duration: data['duration']?.toInt(),
+        posts: data['posts'] != null
+            ? data['posts'].map<Post>((post) {
+                return Post.fromMap(post);
+              }).toList()
+            : null);
   }
 }

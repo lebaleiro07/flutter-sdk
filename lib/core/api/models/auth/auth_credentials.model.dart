@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/string_util.dart';
-
 class AuthCredentials {
   String password;
   String usernameOrEmail;
@@ -13,10 +11,10 @@ class AuthCredentials {
     // @required this.deviceToken
   });
 
-  Map<String, String> toJSON(){
+  Map<String, String> toJSON() {
     final Map<String, String> credentialsMap = {
       "email": usernameOrEmail,
-      "password": password//.hash(),
+      "password": password //.hash(),
       // "device_token": deviceToken
     };
 

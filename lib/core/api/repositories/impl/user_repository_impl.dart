@@ -2,21 +2,17 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:music_playce_sdk/core/api/endpoints/search_endpoint.dart';
-import 'package:music_playce_sdk/core/api/endpoints/user_endpoint.dart';
-import 'package:music_playce_sdk/core/api/models/users/term.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_follow_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart';
-import 'package:music_playce_sdk/core/api/repositories/search/search_repository.dart';
-import 'package:music_playce_sdk/core/api/repositories/users_repository.dart';
-import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 
+import '../../../http/music_playce_http.dart';
+import '../../endpoints/search_endpoint.dart';
+import '../../endpoints/user_endpoint.dart';
 import '../../models/cursor.dart';
-import '../../models/cursor.dart';
+import '../../models/users/term.dart';
+import '../../models/users/user_follow_response.model.dart';
+import '../../models/users/user_likes_response.model.dart';
 import '../../models/users/user_playlists_response.model.dart';
-import '../../models/users/user_playlists_response.model.dart';
+import '../../models/users/user_response.model.dart';
+import '../users_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final MusicPlayceHttp httpClient;
