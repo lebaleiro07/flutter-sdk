@@ -83,7 +83,7 @@ class UserUpdateResponse {
             json["id_picture_cover"] == null ? null : json["id_picture_cover"],
         searchable: json["searchable"] == null
             ? null
-            : List<dynamic>.from(json["searchable"].map((x) => x)),
+            : List<String>.from(json["searchable"].map((x) => x)),
         infoWebsite: json["info_website"] == null ? null : json["info_website"],
         infoFbPage: json["info_fb_page"] == null ? null : json["info_fb_page"],
         infoInsta: json["info_insta"] == null ? null : json["info_insta"],
@@ -129,7 +129,7 @@ class UserUpdateResponse {
             : json["stripe_customer_id"],
         stripePaymentMethods: json["stripe_payment_methods"] == null
             ? null
-            : List<dynamic>.from(json["stripe_payment_methods"].map((x) => x)),
+            : List<String>.from(json["stripe_payment_methods"].map((x) => x)),
         deleted: json["deleted"] == null ? null : json["deleted"],
         datetimeCreated: json["datetime_created"] == null
             ? null
