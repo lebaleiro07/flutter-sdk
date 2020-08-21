@@ -70,7 +70,7 @@ abstract class UserRepository {
   /// [limit] to determine the number of results per page
   ///
   /// This will return all user's playlists in a [DataWithCursor] format
-  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({String userId, String page, int limit = 5 });
+  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({String userId, String page, int limit = 12 });
 
   Future<Either<Exception, List<User>>> search(String query, { int limit = 5 });
 
