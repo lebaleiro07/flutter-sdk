@@ -31,7 +31,7 @@ abstract class UserRepository {
   /// It receive a [User] that contains the new
   /// content and the [userId]
   ///
-  /// It returns a [User] object, that is the
+  /// It returns a [UserUpdateResponse] object, that is the
   /// updated object
   Future<UserUpdateResponse> updateUser(User user);
 
