@@ -1,20 +1,19 @@
 import 'package:http/http.dart';
-import 'package:music_playce_sdk/core/api/endpoints/auth_endpoint.dart';
-import 'package:music_playce_sdk/core/api/models/auth/activity_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/activity_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/auth_credentials.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/forgot_password_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/policy_terms.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/refresh_token_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/refresh_token_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signin_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signout_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signup_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/signup_response.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/spotify_login_request.model.dart';
-import 'package:music_playce_sdk/core/api/models/auth/validate_token_response.model.dart';
 
 import '../endpoints/auth_endpoint.dart';
+import '../models/auth/activity_request.model.dart';
+import '../models/auth/activity_response.model.dart';
+import '../models/auth/auth_credentials.model.dart';
+import '../models/auth/forgot_password_request.model.dart';
+import '../models/auth/policy_terms.model.dart';
+import '../models/auth/refresh_token_request.model.dart';
+import '../models/auth/refresh_token_response.model.dart';
+import '../models/auth/signin_response.model.dart';
+import '../models/auth/signout_response.model.dart';
+import '../models/auth/signup_request.model.dart';
+import '../models/auth/signup_response.model.dart';
+import '../models/auth/spotify_login_request.model.dart';
+import '../models/auth/validate_token_response.model.dart';
 
 /// The abstract class for AuthRepository
 ///

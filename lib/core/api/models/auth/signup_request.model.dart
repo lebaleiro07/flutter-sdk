@@ -8,16 +8,15 @@ class SignUpRequest {
   int acceptedPolicy;
   bool acceptedMarketing;
 
-  SignUpRequest({
-    this.name,
-    this.password,
-    this.email,
-    this.phone,
-    this.deviceToken,
-    this.acceptedTerms,
-    this.acceptedPolicy,
-    this.acceptedMarketing
-  });
+  SignUpRequest(
+      {this.name,
+      this.password,
+      this.email,
+      this.phone,
+      this.deviceToken,
+      this.acceptedTerms,
+      this.acceptedPolicy,
+      this.acceptedMarketing});
 
   SignUpRequest.fromJson(Map<String, dynamic> json) {
     name = json['name'];

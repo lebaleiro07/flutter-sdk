@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 class Links {
@@ -26,8 +25,7 @@ class Links {
 
   String toJson() => json.encode(toMap());
 
-  factory Links.fromMap(Map<String, dynamic> json) =>
-      Links(
+  factory Links.fromMap(Map<String, dynamic> json) => Links(
         youtube: json["youtube"] == null ? null : json["youtube"],
         spotify: json["spotify"] == null ? null : json["spotify"],
         deezer: json["deezer"] == null ? null : json["deezer"],
@@ -36,11 +34,10 @@ class Links {
         tidal: json["tidal"] == null ? null : json["tidal"],
         soundcloud: json["soundcloud"] == null ? null : json["soundcloud"],
         youtubeMusic:
-        json["youtube_music"] == null ? null : json["youtube_music"],
+            json["youtube_music"] == null ? null : json["youtube_music"],
       );
 
-  Map<String, dynamic> toMap() =>
-      {
+  Map<String, dynamic> toMap() => {
         "youtube": youtube == null ? null : youtube,
         "spotify": spotify == null ? null : spotify,
         "deezer": deezer == null ? null : deezer,

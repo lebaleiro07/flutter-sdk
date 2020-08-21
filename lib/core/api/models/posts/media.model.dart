@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:music_playce_sdk/core/api/models/posts/meta.model.dart';
+
+import 'meta.model.dart';
 
 class Media {
   String id;
@@ -10,7 +11,14 @@ class Media {
   Meta meta;
   bool published;
 
-  Media({this.id, this.url, this.type, this.resources, this.processed, this.meta, this.published});
+  Media(
+      {this.id,
+      this.url,
+      this.type,
+      this.resources,
+      this.processed,
+      this.meta,
+      this.published});
 
   factory Media.fromJson(String str) => Media.fromMap(json.decode(str));
 
@@ -25,14 +33,13 @@ class Media {
           : List<dynamic>.from(json["resources"].map((x) => x)),
       meta: json['meta'] == null ? null : Meta.fromMap(json['meta']),
       processed: json['processed'] == null ? null : json['processed'],
-      published: json['published'] == null ? null : json['published']
-  );
+      published: json['published'] == null ? null : json['published']);
 
   Map<String, dynamic> toMap() => {
-    "url": url == null ? null : url,
-    "type": type == null ? null : type,
-    "resources": resources == null
-        ? null
-        : List<String>.from(resources.map((x) => x)),
-  };
+        "url": url == null ? null : url,
+        "type": type == null ? null : type,
+        "resources": resources == null
+            ? null
+            : List<String>.from(resources.map((x) => x)),
+      };
 }

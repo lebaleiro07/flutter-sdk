@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:music_playce_sdk/core/api/models/users/picture.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_roles.model.dart';
+import 'picture.model.dart';
+import 'user_roles.model.dart';
 
 class User {
   String id;

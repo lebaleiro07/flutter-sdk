@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:music_playce_sdk/core/api/models/posts/like.model.dart';
-import 'package:music_playce_sdk/core/api/models/posts/music.model.dart';
-import 'package:music_playce_sdk/core/api/models/posts/release.model.dart';
-import 'package:music_playce_sdk/core/api/models/posts/tag.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/picture.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart';
+import '../users/picture.model.dart';
+import '../users/user_response.model.dart';
+import 'like.model.dart';
+import 'music.model.dart';
+import 'release.model.dart';
+import 'tag.model.dart';
 
 class Post {
   String id;
@@ -76,25 +76,25 @@ class Post {
         composers: json["composers"] == null
             ? null
             : new List<User>.from(
-            json["composers"].map((x) => User.fromMap(x))),
+                json["composers"].map((x) => User.fromMap(x))),
         interpreters: json["interpreters"] == null
             ? null
             : new List<User>.from(
-            json["interpreters"].map((x) => User.fromMap(x))),
+                json["interpreters"].map((x) => User.fromMap(x))),
         tags: json["tags"] == null
             ? null
             : new List<Tag>.from(json["tags"].map((x) => Tag.fromMap(x))),
         like: json["like"] == null ? null : Like.fromMap(json["like"]),
         picture:
-        json["picture"] == null ? null : Picture.fromMap(json["picture"]),
+            json["picture"] == null ? null : Picture.fromMap(json["picture"]),
         uploader:
-        json["uploader"] == null ? null : User.fromMap(json["uploader"]),
+            json["uploader"] == null ? null : User.fromMap(json["uploader"]),
         lyrics: json["lyrics"] == null ? null : json["lyrics"],
         cursor: json["cursor"] == null ? null : json["cursor"],
         releases: json["releases"] == null
             ? null
             : List<Release>.from(
-            json["releases"].map((x) => Release.fromMap(x))),
+                json["releases"].map((x) => Release.fromMap(x))),
       );
     } catch (e) {
       print(e);
@@ -106,34 +106,34 @@ class Post {
   }
 
   Map<String, dynamic> toMap() => {
-    "_id": id == null ? null : id,
-    "name": name == null ? null : name,
-    "duration": duration == null ? null : duration,
-    "media": media == null ? null : media.toMap(),
-    "plays": plays == null ? null : plays,
-    "indications": indications == null ? null : indications,
-    "deleted": deleted == null ? null : deleted,
-    "datetime_created":
-    datetimeCreated == null ? null : datetimeCreated.toIso8601String(),
-    "datetime_updated":
-    datetimeUpdated == null ? null : datetimeUpdated.toIso8601String(),
-    "likes": likes == null ? null : likes,
-    "composers": composers == null
-        ? null
-        : new List<dynamic>.from(composers.map((x) => x.toMap())),
-    "interpreters": interpreters == null
-        ? null
-        : new List<dynamic>.from(interpreters.map((x) => x.toMap())),
-    "tags": tags == null
-        ? null
-        : new List<dynamic>.from(tags.map((x) => x.toMap())),
-    "like": like == null ? null : like.toMap(),
-    "picture": picture == null ? null : picture.toMap(),
-    "uploader": uploader == null ? null : uploader.toMap(),
-    "lyrics": lyrics == null ? null : lyrics,
-    "cursor": cursor == null ? null : cursor,
-    "releases": releases == null
-        ? null
-        : new List<dynamic>.from(releases.map((x) => x.toMap())),
-  };
+        "_id": id == null ? null : id,
+        "name": name == null ? null : name,
+        "duration": duration == null ? null : duration,
+        "media": media == null ? null : media.toMap(),
+        "plays": plays == null ? null : plays,
+        "indications": indications == null ? null : indications,
+        "deleted": deleted == null ? null : deleted,
+        "datetime_created":
+            datetimeCreated == null ? null : datetimeCreated.toIso8601String(),
+        "datetime_updated":
+            datetimeUpdated == null ? null : datetimeUpdated.toIso8601String(),
+        "likes": likes == null ? null : likes,
+        "composers": composers == null
+            ? null
+            : new List<dynamic>.from(composers.map((x) => x.toMap())),
+        "interpreters": interpreters == null
+            ? null
+            : new List<dynamic>.from(interpreters.map((x) => x.toMap())),
+        "tags": tags == null
+            ? null
+            : new List<dynamic>.from(tags.map((x) => x.toMap())),
+        "like": like == null ? null : like.toMap(),
+        "picture": picture == null ? null : picture.toMap(),
+        "uploader": uploader == null ? null : uploader.toMap(),
+        "lyrics": lyrics == null ? null : lyrics,
+        "cursor": cursor == null ? null : cursor,
+        "releases": releases == null
+            ? null
+            : new List<dynamic>.from(releases.map((x) => x.toMap())),
+      };
 }

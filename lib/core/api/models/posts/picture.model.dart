@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:music_playce_sdk/core/api/models/posts/media.model.dart';
+import 'media.model.dart';
 
 class Picture extends Media {
   String id;
@@ -23,26 +23,26 @@ class Picture extends Media {
   String toJson() => json.encode(toMap());
 
   factory Picture.fromMap(Map<String, dynamic> json) => new Picture(
-    id: json["_id"] == null ? null : json["_id"],
-    url: json["url"] == null ? null : json["url"],
-    type: json["type"] == null ? null : json["type"],
-    deleted: json["deleted"] == null ? null : json["deleted"],
-    datetimeCreated: json["datetime_created"] == null
-        ? null
-        : DateTime.parse(json["datetime_created"]),
-    datetimeUpdated: json["datetime_updated"] == null
-        ? null
-        : DateTime.parse(json["datetime_updated"]),
-  );
+        id: json["_id"] == null ? null : json["_id"],
+        url: json["url"] == null ? null : json["url"],
+        type: json["type"] == null ? null : json["type"],
+        deleted: json["deleted"] == null ? null : json["deleted"],
+        datetimeCreated: json["datetime_created"] == null
+            ? null
+            : DateTime.parse(json["datetime_created"]),
+        datetimeUpdated: json["datetime_updated"] == null
+            ? null
+            : DateTime.parse(json["datetime_updated"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "_id": id == null ? null : id,
-    "url": url == null ? null : url,
-    "type": type == null ? null : type,
-    "deleted": deleted == null ? null : deleted,
-    "datetime_created":
-    datetimeCreated == null ? null : datetimeCreated.toIso8601String(),
-    "datetime_updated":
-    datetimeUpdated == null ? null : datetimeUpdated.toIso8601String(),
-  };
+        "_id": id == null ? null : id,
+        "url": url == null ? null : url,
+        "type": type == null ? null : type,
+        "deleted": deleted == null ? null : deleted,
+        "datetime_created":
+            datetimeCreated == null ? null : datetimeCreated.toIso8601String(),
+        "datetime_updated":
+            datetimeUpdated == null ? null : datetimeUpdated.toIso8601String(),
+      };
 }

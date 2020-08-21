@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:music_playce_sdk/core/api/endpoints/search_endpoint.dart';
-import 'package:music_playce_sdk/core/api/repositories/search/search_repository.dart';
-import 'package:music_playce_sdk/core/http/music_playce_http.dart';
+
+import '../../../../http/music_playce_http.dart';
+import '../../../endpoints/search_endpoint.dart';
+import '../search_repository.dart';
 
 class SearchRepositoryImpl implements SearchRepository {
   final MusicPlayceHttp _httpClient;
@@ -11,16 +12,15 @@ class SearchRepositoryImpl implements SearchRepository {
   const SearchRepositoryImpl(this._httpClient);
 
   @override
-  Future<Either<Exception, Map>> search(String query, { int limit = 5 }) async {
+  Future<Either<Exception, Map>> search(String query, {int limit = 5}) async {
     try {
-      final response = await _httpClient.get(
-        "${SearchEndpoint.search}?query=$query&limit=$limit"
-      );
+      final response = await _httpClient
+          .get("${SearchEndpoint.search}?query=$query&limit=$limit");
 
       final json = jsonDecode(response?.body)['data'];
 
       return json['data'];
-    } catch(e) {
+    } catch (e) {
       return right(e);
     }
   }

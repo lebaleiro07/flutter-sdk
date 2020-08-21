@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:music_playce_sdk/core/api/repositories/v3/auth/auth_repository.dart';
-import 'package:music_playce_sdk/core/api/services/auth_service.dart';
+
+import '../../repositories/v3/auth/auth_repository.dart';
+import '../auth_service.dart';
 
 class AuthServiceImpl implements AuthService {
   final AuthRepository authRepository;
@@ -11,7 +12,7 @@ class AuthServiceImpl implements AuthService {
     @required this.authRepository,
   });
 
-  Future<bool> validateToken(String token) async{
+  Future<bool> validateToken(String token) async {
     if (token.isNotEmpty) {
       final validateTokenResponse = await authRepository.validateToken(token);
 
@@ -27,7 +28,6 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> clearSession() {
-    return GetIt.instance<FlutterSecureStorage>()
-      .delete(key: "token");
+    return GetIt.instance<FlutterSecureStorage>().delete(key: "token");
   }
 }

@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:music_playce_sdk/core/api/environment.dart';
+
+import '../../environment.dart';
 
 class AuthEndpoint {
   static final _env = GetIt.instance<Environment>();
@@ -8,13 +9,16 @@ class AuthEndpoint {
 
   static String signup = "${_env.apiHost}/v3/auth/register";
 
-  static String confirm(String code) => "${_env.apiHost}/v3/auth/confirmation/$code";
+  static String confirm(String code) =>
+      "${_env.apiHost}/v3/auth/confirmation/$code";
 
   static String refresh = "${_env.apiHost}/v2/auth/refresh";
 
-  static String validate(String token) => "${_env.apiHost}/v1/auth/validate/$token";
+  static String validate(String token) =>
+      "${_env.apiHost}/v1/auth/validate/$token";
 
-  static String logout(String deviceToken) => "${_env.apiHost}/v1/auth/signout?device_token=$deviceToken";
+  static String logout(String deviceToken) =>
+      "${_env.apiHost}/v1/auth/signout?device_token=$deviceToken";
 
   static String forgotPassword(String email) => "${_env.apiHost}/v3/auth/forgot-password/$email?isMobile=true";
 
@@ -22,7 +26,9 @@ class AuthEndpoint {
 
   static String activity = "${_env.apiHost}/v1/auth/me/activity";
 
-  static String activityOff(String activityId) => "${_env.apiHost}/v1/auth/me/activity/$activityId";
+  static String activityOff(String activityId) =>
+      "${_env.apiHost}/v1/auth/me/activity/$activityId";
 
-  static String resendConfirmation = "${_env.apiHost}/v3/auth/resend-confirmation";
+  static String resendConfirmation =
+      "${_env.apiHost}/v3/auth/resend-confirmation";
 }

@@ -24,16 +24,13 @@ class Cursor {
   Map<String, dynamic> toMap() => {
         "previous": previous == null ? null : previous,
         "next": next == null ? null : next,
-        "route": route == null? null : route,
+        "route": route == null ? null : route,
       };
 }
 
 class DataWithCursor<T> {
   final List<T> data;
   final Cursor cursor;
-  
-  const DataWithCursor({
-    this.data,
-    this.cursor
-  });
+
+  const DataWithCursor({this.data, this.cursor});
 }

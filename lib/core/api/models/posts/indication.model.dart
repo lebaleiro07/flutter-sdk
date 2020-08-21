@@ -26,18 +26,23 @@ class Indication {
 
   Indication.fromJson(Map<String, dynamic> json) {
     id = json['id'] != null ? json['id'] : null;
-    idProfileFrom = json['id_profile_from'] != null ? json['id_profile_from'] : null;
+    idProfileFrom =
+        json['id_profile_from'] != null ? json['id_profile_from'] : null;
     idPost = json['id_post'] != null ? json['id_post'] : null;
     idProfileTo = json['id_profile_to'] != null ? json['id_profile_to'] : null;
-    listenTimeBefore = json['listen_time_before'] != null ? json['listen_time_before'] : null;
+    listenTimeBefore =
+        json['listen_time_before'] != null ? json['listen_time_before'] : null;
     playsBefore = json['plays_before'] != null ? json['plays_before'] : null;
-    playbackMoment = json['playback_moment'] != null ? json['playback_moment'] : null;
+    playbackMoment =
+        json['playback_moment'] != null ? json['playback_moment'] : null;
     dateCreated = json['date_created'] != null ? json['date_created'] : null;
     deleted = json['deleted'] != null ? json['deleted'] : null;
-    datetimeCreated = json['datetime_created'] != null ? 
-      DateTime.parse(json['datetime_created']) : null;
-    datetimeUpdated = json['datetime_updated'] != null ? 
-      DateTime.parse(json['datetime_updated']) : null;
+    datetimeCreated = json['datetime_created'] != null
+        ? DateTime.parse(json['datetime_created'])
+        : null;
+    datetimeUpdated = json['datetime_updated'] != null
+        ? DateTime.parse(json['datetime_updated'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -45,7 +50,7 @@ class Indication {
     data['id'] = id;
     data['id_profile_from'] = idProfileFrom;
     data['id_post'] = idPost;
-    data['id_profile_to'] =idProfileTo;
+    data['id_profile_to'] = idProfileTo;
     data['listen_time_before'] = listenTimeBefore;
     data['plays_before'] = playsBefore;
     data['playback_moment'] = playbackMoment;

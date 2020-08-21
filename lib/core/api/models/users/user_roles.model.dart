@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:music_playce_sdk/core/api/models/users/user_privileges.model.dart';
-import 'package:music_playce_sdk/core/api/models/users/user_quotas.model.dart';
+import 'user_privileges.model.dart';
+import 'user_quotas.model.dart';
 
 class UserRoles {
   String idRole;
