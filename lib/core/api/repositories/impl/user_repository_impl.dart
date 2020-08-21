@@ -9,6 +9,7 @@ import 'package:music_playce_sdk/core/api/models/users/user_follow_response.mode
 import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart';
+import 'package:music_playce_sdk/core/api/models/users/user_update_response.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/search/search_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/users_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
@@ -35,13 +36,19 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> updateUser(User user) async {
+  Future<UserUpdateResponse> updateUser(User user) async {
     final response = await httpClient.put(
       UserEndpoint.updateUser(user.id),
-      body: user.toJson(),
+      body: {
+        "name": user.name,
+        "picture_cover": user.pictureCover,
+        "picture_profile": user.pictureProfile,
+        "location": user.location,
+        "description": user.description,
+      }
     );
 
-    return User.fromMap(jsonDecode(response?.body)['data']);
+    return UserUpdateResponse.fromMap(jsonDecode(response?.body)['data']);
   }
 
   @override

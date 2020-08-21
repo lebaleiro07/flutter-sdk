@@ -5,6 +5,7 @@ import 'package:music_playce_sdk/core/api/models/users/user_follow_response.mode
 import 'package:music_playce_sdk/core/api/models/users/user_likes_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_playlists_response.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_response.model.dart';
+import 'package:music_playce_sdk/core/api/models/users/user_update_response.model.dart';
 
 import '../models/cursor.dart';
 import '../models/users/user_playlists_response.model.dart';
@@ -30,9 +31,9 @@ abstract class UserRepository {
   /// It receive a [User] that contains the new
   /// content and the [userId]
   ///
-  /// It returns a [User] object, that is the
+  /// It returns a [UserUpdateResponse] object, that is the
   /// updated object
-  Future<User> updateUser(User user);
+  Future<UserUpdateResponse> updateUser(User user);
 
   /// Sends a HTTP request to the user endpoint in order to
   /// get all user's likes by his ID
