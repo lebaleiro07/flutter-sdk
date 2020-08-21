@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
 import '../../../http/music_playce_http.dart';
+import '../../models/users/user_update_response.model.dart';
 import '../../endpoints/search_endpoint.dart';
 import '../../endpoints/user_endpoint.dart';
 import '../../models/cursor.dart';

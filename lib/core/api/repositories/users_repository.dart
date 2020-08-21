@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 
+import '../models/users/user_update_response.model.dart';
 import '../endpoints/user_endpoint.dart';
 import '../models/cursor.dart';
 import '../models/users/term.dart';

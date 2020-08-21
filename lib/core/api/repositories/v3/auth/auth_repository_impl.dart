@@ -112,7 +112,6 @@ class AuthRepositoryV3 implements AuthRepository {
       return left(e);
     }
   }
-}
 
   @override
   Future<Either<Exception, Response>> forgotPassword(String email) async {
