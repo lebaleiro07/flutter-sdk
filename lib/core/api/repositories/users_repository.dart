@@ -29,9 +29,9 @@ abstract class UserRepository {
   /// It receive a [User] that contains the new
   /// content and the [userId]
   ///
-  /// It returns a [User] object, that is the
+  /// It returns a [UserUpdateResponse] object, that is the
   /// updated object
-  Future<User> updateUser(User user);
+  Future<UserUpdateResponse> updateUser(User user);
 
   /// Sends a HTTP request to the user endpoint in order to
   /// get all user's likes by his ID
@@ -69,8 +69,7 @@ abstract class UserRepository {
   ///
   /// This will return all user's playlists in a [DataWithCursor] format
   Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists(
-      {String userId, String page, int limit = 5});
-
+      {String userId, String page, int limit = 12});
   Future<Either<Exception, List<User>>> search(String query, {int limit = 5});
 
   Future<Either<Exception, dynamic>> checkEmail(String email);

@@ -31,13 +31,19 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> updateUser(User user) async {
+  Future<UserUpdateResponse> updateUser(User user) async {
     final response = await httpClient.put(
       UserEndpoint.updateUser(user.id),
-      body: user.toJson(),
+      body: {
+        "name": user.name,
+        "picture_cover": user.pictureCover,
+        "picture_profile": user.pictureProfile,
+        "location": user.location,
+        "description": user.description,
+      }
     );
 
-    return User.fromMap(jsonDecode(response?.body)['data']);
+    return UserUpdateResponse.fromMap(jsonDecode(response?.body)['data']);
   }
 
   @override
@@ -68,7 +74,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({ String userId, String page, int limit = 8 }) async{
+  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({ String userId, String page, int limit = 12 }) async{
     try {
       final response = await httpClient.get(
           "${UserEndpoint.getAllUserPlaylists(userId)}?limit=$limit" + (page != null ? "&page=$page" : "")

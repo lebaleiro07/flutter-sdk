@@ -36,4 +36,8 @@ abstract class AuthRepository {
   Future<Either<Exception, dynamic>> confirm(String code);
 
   Future<Either<Exception, dynamic>> resendConfirmation(String email);
+
+  Future<Either<Exception, dynamic>> forgotPassword(String email);
+
+  Future<Either<Exception, dynamic>> resetPassword(String code, String password);
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -108,6 +109,32 @@ class AuthRepositoryV3 implements AuthRepository {
 
       return right(data);
     } catch (e) {
+      return left(e);
+    }
+  }
+}
+
+  @override
+  Future<Either<Exception, Response>> forgotPassword(String email) async {
+    try {
+      final response = await _httpClient.get(AuthEndpoint.forgotPassword(email));
+
+      return right(response);
+    } catch(e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Response>> resetPassword(String code, String password) async {
+    try {
+      final response = await _httpClient.post(AuthEndpoint.resetPassword, body: {
+        "password": password,
+        "code": code
+      });
+
+      return right(response);
+    } catch(e) {
       return left(e);
     }
   }
