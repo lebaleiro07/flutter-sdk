@@ -11,7 +11,11 @@ abstract class MusicPlayceException implements Exception {
         return json['error']['code'];
       }
     } else if (json.containsKey('data')) {
-      return json['data']['code'];
+      if (json['data'].containsKey('code')) {
+        return json['data']['code'];
+      } else if (json['data'].containsKey('message')) {
+        return json['data']['message']['code'];
+      }
     }
 
     return null;

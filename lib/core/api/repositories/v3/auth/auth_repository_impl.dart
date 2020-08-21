@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart';
 import 'package:music_playce_sdk/core/api/endpoints/v3/auth_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/auth/auth_credentials.model.dart';
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_request.model.dart';
@@ -13,6 +14,7 @@ import 'package:music_playce_sdk/core/api/models/auth/v3/signup_response.model.d
 import 'package:music_playce_sdk/core/api/models/auth/validate_token_response.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/v3/auth/auth_repository.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
+import 'package:music_playce_sdk/core/utils/string_util.dart';
 
 class AuthRepositoryV3 implements AuthRepository {
   final MusicPlayceHttp _httpClient;
@@ -106,6 +108,31 @@ class AuthRepositoryV3 implements AuthRepository {
       final data = jsonDecode(response?.body)['data'];
 
       return right(data);
+    } catch(e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Response>> forgotPassword(String email) async {
+    try {
+      final response = await _httpClient.get(AuthEndpoint.forgotPassword(email));
+
+      return right(response);
+    } catch(e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Response>> resetPassword(String code, String password) async {
+    try {
+      final response = await _httpClient.post(AuthEndpoint.resetPassword, body: {
+        "password": password,
+        "code": code
+      });
+
+      return right(response);
     } catch(e) {
       return left(e);
     }

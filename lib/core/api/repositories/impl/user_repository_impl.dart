@@ -72,7 +72,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({ String userId, String page, int limit = 8 }) async{
+  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({ String userId, String page, int limit = 5 }) async{
     try {
       final response = await httpClient.get(
           "${UserEndpoint.getAllUserPlaylists(userId)}?limit=$limit" + (page != null ? "&page=$page" : "")
