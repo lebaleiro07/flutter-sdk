@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
+import 'package:music_playce_sdk/core/api/models/search/search_item.dart';
 
 abstract class SearchRepository {
-  Future<Either<Exception, Map>> search(String query, {int limit = 5});
+  Future<List<SearchItem>> search(String query, {int limit = 5});
 }
