@@ -4,9 +4,11 @@ import 'package:music_playce_sdk/core/api/environment.dart';
 import 'package:music_playce_sdk/core/api/interceptors/set_token_interceptor.dart';
 import 'package:music_playce_sdk/core/api/models/auth/refresh_token_response.model.dart';
 import 'package:music_playce_sdk/core/api/repositories/impl/notification_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/impl/places_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/impl/playlists_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/impl/user_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/notification_repository.dart';
+import 'package:music_playce_sdk/core/api/repositories/places_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/playlists_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/post/impl/post_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/post/post_repository.dart';
@@ -58,6 +60,9 @@ class MusicPlayceSdk {
 
     GetIt.instance.registerSingleton<UserRepository>(
         UserRepositoryImpl(httpClient: _musicPlayceHttp));
+
+    GetIt.instance.registerSingleton<PlacesRepository>(
+        PlacesRepositoryImpl(httpClient: _musicPlayceHttp));
 
     GetIt.instance.registerSingleton<Environment>(environment);
 
