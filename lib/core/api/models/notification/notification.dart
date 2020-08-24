@@ -1,6 +1,6 @@
-import 'package:music_playce_sdk/core/api/models/base_model.dart';
-import 'package:music_playce_sdk/core/api/models/cursor.dart';
-import 'package:music_playce_sdk/core/utils/string_util.dart';
+import '../../../utils/string_util.dart';
+import '../base_model.dart';
+import '../cursor.dart';
 
 class CentralNotification implements BaseModel<CentralNotification> {
   String id;
@@ -18,7 +18,7 @@ class CentralNotification implements BaseModel<CentralNotification> {
   DateTime datetimeDelivered;
   Cursor cursor;
 
-  CentralNotification({ 
+  CentralNotification({
     this.id,
     this.title,
     this.subtitle,
@@ -45,14 +45,20 @@ class CentralNotification implements BaseModel<CentralNotification> {
     intent = json['intent'];
     datetimeCreated = DateTime.parse(json['datetime_created']);
     datetimeUpdated = DateTime.parse(json['datetime_updated']);
-    unread = json['unread'] is bool ? json['unread'] : (json['unread'] as String).toBool();
-    pinned = json['pinned'] is bool ? json['pinned'] : (json['pinned'] as String).toBool();
-    datetimeDelivered = json['datetime_delivered'] == null ? null : DateTime.parse(json['datetime_delivered']);
+    unread = json['unread'] is bool
+        ? json['unread']
+        : (json['unread'] as String).toBool();
+    pinned = json['pinned'] is bool
+        ? json['pinned']
+        : (json['pinned'] as String).toBool();
+    datetimeDelivered = json['datetime_delivered'] == null
+        ? null
+        : DateTime.parse(json['datetime_delivered']);
   }
 
   Map<String, dynamic> toJSON() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    
+
     data['title'] = this.title;
     data['subtitle'] = this.subtitle;
     data['body'] = this.body;
@@ -64,8 +70,10 @@ class CentralNotification implements BaseModel<CentralNotification> {
     data['datetime_updated'] = this.datetimeUpdated.toIso8601String();
     data['unread'] = this.unread.toString();
     data['pinned'] = this.pinned.toString();
-    data['datetime_delivered'] = this.datetimeDelivered == null ? null : this.datetimeDelivered.toIso8601String();
-    
+    data['datetime_delivered'] = this.datetimeDelivered == null
+        ? null
+        : this.datetimeDelivered.toIso8601String();
+
     return data;
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:music_playce_sdk/core/api/models/posts/picture.model.dart';
+import '../posts/picture.model.dart';
 
 class UserPlaylists {
   String idPlaylist;
@@ -54,5 +54,4 @@ class UserPlaylists {
         "picture": picture == null ? null : picture,
         "type_source": typeSource == null ? null : typeSource,
       };
-
 }

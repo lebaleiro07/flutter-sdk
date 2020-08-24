@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:music_playce_sdk/core/api/environment.dart';
+
+import '../environment.dart';
 
 class AuthEndpoint {
   static final _env = GetIt.instance<Environment>();
@@ -10,9 +11,11 @@ class AuthEndpoint {
 
   static String refresh = "${_env.apiHost}/v2/auth/refresh";
 
-  static String validate(String token) => "${_env.apiHost}/v1/auth/validate/$token";
+  static String validate(String token) =>
+      "${_env.apiHost}/v1/auth/validate/$token";
 
-  static String logout(String deviceToken) => "${_env.apiHost}/v1/auth/signout?device_token=$deviceToken";
+  static String logout(String deviceToken) =>
+      "${_env.apiHost}/v1/auth/signout?device_token=$deviceToken";
 
   static String resendEmail = "${_env.apiHost}/v1/auth/signup/verify";
 
@@ -22,7 +25,8 @@ class AuthEndpoint {
 
   static String activity = "${_env.apiHost}/v1/auth/me/activity";
 
-  static String activityOff(String activityId) => "${_env.apiHost}/v1/auth/me/activity/$activityId";
+  static String activityOff(String activityId) =>
+      "${_env.apiHost}/v1/auth/me/activity/$activityId";
 
   static String social = "${_env.apiHost}/v1/auth/social";
 

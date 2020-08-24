@@ -3,7 +3,7 @@ class RefreshTokenResponse {
   String token;
   String refreshToken;
 
-  RefreshTokenResponse({ this.iss, this.token, this.refreshToken });
+  RefreshTokenResponse({this.iss, this.token, this.refreshToken});
 
   RefreshTokenResponse.fromJson(Map<String, dynamic> json) {
     iss = json['iss'] != null ? json['iss'] : null;

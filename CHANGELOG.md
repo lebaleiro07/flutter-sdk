@@ -1,5 +1,20 @@
 # Changelog
 
+# 0.6.3
+### Added
+- Adding update user functionality to user repository
+
+### Changed
+- Changing imports to relative imports format
+
+# 0.6.2
+### Added
+- Adding forgot and reset password routes integration
+
+# 0.6.1
+### Added 
+- New functionalities to playlist repository
+
 # 0.6.0
 ### Added
 - Improving exceptions class by accepting code from backend
