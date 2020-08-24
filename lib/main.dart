@@ -1,15 +1,16 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rxdart/rxdart.dart';
-
 import 'core/api/environment.dart';
 import 'core/api/interceptors/refresh_token_interceptor.dart';
 import 'core/api/interceptors/set_token_interceptor.dart';
 import 'core/api/models/auth/refresh_token_response.model.dart';
 import 'core/api/repositories/impl/notification_repository_impl.dart';
+import 'core/api/repositories/impl/places_repository_impl.dart';
 import 'core/api/repositories/impl/playlists_repository_impl.dart';
 import 'core/api/repositories/impl/user_repository_impl.dart';
 import 'core/api/repositories/notification_repository.dart';
+import 'core/api/repositories/places_repository.dart';
 import 'core/api/repositories/playlists_repository.dart';
 import 'core/api/repositories/post/impl/post_repository_impl.dart';
 import 'core/api/repositories/post/post_repository.dart';
@@ -54,6 +55,9 @@ class MusicPlayceSdk {
 
     GetIt.instance.registerSingleton<UserRepository>(
         UserRepositoryImpl(httpClient: _musicPlayceHttp));
+
+    GetIt.instance.registerSingleton<PlacesRepository>(
+        PlacesRepositoryImpl(httpClient: _musicPlayceHttp));
 
     GetIt.instance.registerSingleton<Environment>(environment);
 
