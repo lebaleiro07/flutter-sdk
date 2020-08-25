@@ -1,5 +1,9 @@
 # Changelog
 
+0.7.0
+### Added
+- Refactoring repository of search
+
 # 0.6.3+1
 ### Changed
 - Fix addPostToPlaylist http method
