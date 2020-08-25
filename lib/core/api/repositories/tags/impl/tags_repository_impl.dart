@@ -17,7 +17,6 @@ class TagsRepositoryImpl implements TagsRepository {
   @override
   Future<List<Tag>> getAllTags() async {
     final request = await httpClient.get(TagsEndpoint.getAllTags);
-
     final response = json.decode(request?.body)['data'];
 
     final tags = <Tag>[];
@@ -30,6 +29,29 @@ class TagsRepositoryImpl implements TagsRepository {
   }
 
   @override
+  Future<Tag> getTagById(String tagId) async {
+    final request = await httpClient.get(TagsEndpoint.getTagById(tagId));
+    final response = json.decode(request?.body)['data'];
+
+    return Tag.fromMap(response);
+  }
+
+  @override
+  Future<List<Post>> getAllPostByTagId(String tagId) async {
+    final request = await httpClient.get(TagsEndpoint.getAllPostByTagId(tagId));
+
+    final response = json.decode(request?.body)['data'];
+
+    final posts = <Post>[];
+
+    for (var item in response) {
+      posts.add(Post.fromMap(item));
+    }
+
+    return posts;
+  }
+
+  @override
   Future<MusicPlayceHttpResponse> deleteTag({Tag tag}) {
     // TODO: implement deleteTag
     throw UnimplementedError();
@@ -38,18 +60,6 @@ class TagsRepositoryImpl implements TagsRepository {
   @override
   Future<Tag> followTag(String tagId) {
     // TODO: implement followTag
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Post>> getAllPostByTagId(String tagId) {
-    // TODO: implement getAllPostByTagId
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Tag> getTagById(String tagId) {
-    // TODO: implement getTagById
     throw UnimplementedError();
   }
 
