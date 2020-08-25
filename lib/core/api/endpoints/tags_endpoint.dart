@@ -7,11 +7,11 @@ class TagsEndpoint {
 
   static final String getAllTags = '${_env.apiHost}/v1/tags/';
 
-  static String getTagById(String tagId) => '${_env.apiHost}/v1/tags/$tagId';
+  static String getTagById(String tagId) => '${_env.apiHost}/v2/tags/$tagId';
 
   static String followTag(String tagId) =>
-      '${_env.apiHost}/v1/tags/$tagId/follow';
+      '${_env.apiHost}/v2/tags/$tagId/follow';
 
-  static String getAllPostByTagId(String tagId) =>
-      '${_env.apiHost}/v1/tags/$tagId/posts';
+  static String getAllPostByTagId(String tagId, [limit = 5]) =>
+      '${_env.apiHost}/v1/tags/$tagId/posts?limit=$limit';
 }
