@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:music_playce_sdk/core/api/models/posts/picture.model.dart';
+import 'package:music_playce_sdk/core/api/models/users/picture.model.dart';
 import '../posts/posts.model.dart';
 
 class SearchPlaylistResponse {
