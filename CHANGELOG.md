@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.6.3+1
+### Changed
+- Fix addPostToPlaylist http method
+
 # 0.6.3
 ### Added
 - Adding update user functionality to user repository

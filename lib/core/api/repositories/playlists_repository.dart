@@ -44,7 +44,7 @@ abstract class PlaylistsRepository {
   /// It receive a [String] that is a [name]
   ///
   /// It returns an boolean that shows if playlist was add or not
-  Future<bool> createPlaylist(String name);
+  Future<UserPlaylists> createPlaylist(String name);
 
   /// Sends an HTTP request to the playlists endpoint in order to
   /// delete a playlist by its ID
