@@ -12,6 +12,6 @@ class TagsEndpoint {
   static String followTag(String tagId) =>
       '${_env.apiHost}/v2/tags/$tagId/follow';
 
-  static String getAllPostByTagId(String tagId, [limit = 5]) =>
+  static String getAllPostsByTagId(String tagId, [limit = 5]) =>
       '${_env.apiHost}/v1/tags/$tagId/posts?limit=$limit';
 }

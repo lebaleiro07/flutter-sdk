@@ -37,8 +37,9 @@ class TagsRepositoryImpl implements TagsRepository {
   }
 
   @override
-  Future<List<Post>> getAllPostByTagId(String tagId) async {
-    final request = await httpClient.get(TagsEndpoint.getAllPostByTagId(tagId));
+  Future<List<Post>> getAllPostsByTagId(String tagId) async {
+    final request =
+        await httpClient.get(TagsEndpoint.getAllPostsByTagId(tagId));
 
     final response = json.decode(request?.body)['data'];
 
