@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:music_playce_sdk/core/api/models/search/search_playlist_response.dart';
+
 import '../posts/posts.model.dart';
 import '../posts/tag.model.dart';
 import '../users/user_response.model.dart';
@@ -34,6 +36,11 @@ class SearchItem {
         return SearchItem(
           type: data['type'] ?? 'POST',
           response: Post?.fromMap(data) ?? null,
+        );
+      case 'PLAYLIST':
+        return SearchItem(
+          type: data['type'] ?? 'PLAYLIST',
+          response: SearchPlaylistResponse?.fromMap(data) ?? null,
         );
       default:
         return null;

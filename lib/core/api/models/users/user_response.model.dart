@@ -37,6 +37,7 @@ class User {
   int acceptedTerms;
   int acceptedPolicy;
   bool emailConfirmed;
+  String type;
 
   User({
     this.id,
@@ -72,6 +73,7 @@ class User {
     this.acceptedPolicy,
     this.emailConfirmed,
     this.isFollowing,
+    this.type,
   });
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
@@ -144,6 +146,7 @@ class User {
         description: json["description"] == null ? null : json["description"],
         isFollowing:
             json['is_following'] == null ? false : json["is_following"],
+            type: json["type"] == null ? null : json["type"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -173,5 +176,6 @@ class User {
         "following": following == null ? null : following,
         "description": description == null ? null : description,
         "is_following": isFollowing == null ? null : isFollowing,
+        "type" : type == null ? null : type,
       };
 }
