@@ -25,5 +25,5 @@ abstract class TagsRepository {
   Future<MusicPlayceHttpResponse> unfollowTag(String tagId);
 
   /// Returns a [List] which contains all [Post] with the desired [Tag]
-  Future<List<Post>> getAllPostByTagId(String tagId);
+  Future<List<Post>> getAllPostsByTagId(String tagId);
 }
