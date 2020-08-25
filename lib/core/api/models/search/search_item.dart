@@ -37,7 +37,7 @@ class SearchItem {
           type: data['type'] ?? 'POST',
           response: Post?.fromMap(data) ?? null,
         );
-      case 'POST':
+      case 'PLAYLIST':
         return SearchItem(
           type: data['type'] ?? 'PLAYLIST',
           response: SearchPlaylistResponse?.fromMap(data) ?? null,
