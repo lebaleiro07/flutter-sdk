@@ -1,5 +1,9 @@
 # Changelog
 
+#0.8.0
+### Addded
+- Adding repository for tags
+
 0.7.0
 ### Added
 - Refactoring repository of search
