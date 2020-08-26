@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:music_playce_sdk/core/api/repositories/tags/impl/tags_repository_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'core/api/environment.dart';
 import 'core/api/interceptors/refresh_token_interceptor.dart';
@@ -16,6 +17,7 @@ import 'core/api/repositories/post/impl/post_repository_impl.dart';
 import 'core/api/repositories/post/post_repository.dart';
 import 'core/api/repositories/search/impl/search_repository_impl.dart';
 import 'core/api/repositories/search/search_repository.dart';
+import 'core/api/repositories/tags/tags_repository.dart';
 import 'core/api/repositories/users_repository.dart';
 import 'core/api/repositories/v3/auth/auth_repository.dart';
 import 'core/api/repositories/v3/auth/auth_repository_impl.dart';
@@ -65,6 +67,9 @@ class MusicPlayceSdk {
         BehaviorSubject<RefreshTokenResponse>());
 
     GetIt.instance.registerSingleton<MusicPlayceHttp>(_musicPlayceHttp);
+
+    GetIt.instance.registerSingleton<TagsRepository>(
+        TagsRepositoryImpl(httpClient: _musicPlayceHttp));
 
     _musicPlayceHttp.interceptors.addAll([
       SetTokenInterceptor(),
