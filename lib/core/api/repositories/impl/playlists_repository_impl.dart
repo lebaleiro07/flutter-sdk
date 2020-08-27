@@ -28,7 +28,7 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
   @override
   Future<PlaylistResponse> addAPostToPlaylist(
       String playlistId, Post post) async {
-    final response = await httpClient.put(
+    final response = await httpClient.post(
       PlaylistEndpoint.addAPostToPlaylist(playlistId),
       body: {
         'id_post': post.id,
@@ -48,9 +48,9 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
   }
 
   @override
-  Future<bool> createPlaylist(String name) async {
+  Future<UserPlaylists> createPlaylist(String name) async {
     if (name == "Favoritas") {
-      return false;
+      return null;
     }
 
     try {
@@ -61,11 +61,11 @@ class PlaylistsRepositoryImpl implements PlaylistsRepository {
         },
       );
 
-      if (response.statusCode == 200) {
-        return true;
-      }
+      final data = jsonDecode(response?.body)['data'];
+
+      return UserPlaylists.fromMap(data);
     } catch (e) {
-      return false;
+      throw e;
     }
   }
 

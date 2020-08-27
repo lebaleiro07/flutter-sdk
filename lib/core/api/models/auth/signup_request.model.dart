@@ -1,3 +1,5 @@
+import '../../../utils/string_util.dart';
+
 class SignUpRequest {
   String name;
   String password;
@@ -33,7 +35,7 @@ class SignUpRequest {
     final Map<String, dynamic> data = {};
 
     data['name'] = this.name;
-    data['password'] = this.password;
+    data['password'] = this.password.hash();
     data['email'] = this.email;
     data['phone'] = this.phone;
     data['device_token'] = this.deviceToken;

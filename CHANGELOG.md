@@ -1,5 +1,21 @@
 # Changelog
 
+#0.8.0+1
+### Fixed
+- Tags repository not being registered
+
+#0.8.0
+### Addded
+- Adding repository for tags
+
+0.7.0
+### Added
+- Refactoring repository of search
+
+# 0.6.3+1
+### Changed
+- Fix addPostToPlaylist http method
+
 # 0.6.3
 ### Added
 - Adding update user functionality to user repository

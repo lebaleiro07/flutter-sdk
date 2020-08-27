@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:music_playce_sdk/core/api/models/posts/meta.model.dart';
+
 import '../users/picture.model.dart';
 import '../users/user_response.model.dart';
 import 'like.model.dart';
@@ -29,6 +31,13 @@ class Post {
   bool error;
   List<Release> releases;
 
+  String idUploader;
+  int acceptedTerms;
+  bool processed;
+  Meta meta;
+  String type;
+
+
   Post({
     this.id,
     this.name,
@@ -50,6 +59,11 @@ class Post {
     this.tags,
     this.error,
     this.releases,
+    this.idUploader,
+    this.acceptedTerms,
+    this.processed,
+    this.meta,
+    this.type,
   });
 
   factory Post.fromJson(String str) => Post.fromMap(json.decode(str));
@@ -64,6 +78,11 @@ class Post {
         duration: json["duration"] == null ? null : json["duration"].toDouble(),
         media: json["media"] == null ? null : Music.fromMap(json["media"]),
         plays: json["plays"] == null ? null : json["plays"],
+        idUploader: json["id_uploader"] == null ? null : json["id_uploader"],
+        acceptedTerms: json["accepted_terms"] == null ? null : json["accepted_terms"],
+        processed: json["processed"] == null ? null : json["processed"],
+        meta: json['meta'] == null ? null : Meta.fromMap(json['meta']),
+        type: json["type"] == null ? null : json["type"],
         indications: json["indications"] == null ? null : json["indications"],
         deleted: json["deleted"] == null ? null : json["deleted"],
         datetimeCreated: json["datetime_created"] == null
@@ -111,6 +130,11 @@ class Post {
         "duration": duration == null ? null : duration,
         "media": media == null ? null : media.toMap(),
         "plays": plays == null ? null : plays,
+        "id_uploader": idUploader == null ? null : idUploader,
+        "accepted_terms": acceptedTerms == null ? null : acceptedTerms,
+        "processed": processed == null ? null : processed,
+        "meta": meta == null ? null : meta.toMap(),
+        "type": type == null ? null : type,
         "indications": indications == null ? null : indications,
         "deleted": deleted == null ? null : deleted,
         "datetime_created":
