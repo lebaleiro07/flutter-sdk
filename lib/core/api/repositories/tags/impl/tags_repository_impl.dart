@@ -15,8 +15,8 @@ class TagsRepositoryImpl implements TagsRepository {
   TagsRepositoryImpl({@required this.httpClient});
 
   @override
-  Future<List<Tag>> getAllTags() async {
-    final request = await httpClient.get(TagsEndpoint.getAllTags);
+  Future<List<Tag>> getAllTags({int limit = 12}) async {
+    final request = await httpClient.get(TagsEndpoint.getAllTags(limit));
     final response = json.decode(request?.body)['data'];
 
     final tags = <Tag>[];
