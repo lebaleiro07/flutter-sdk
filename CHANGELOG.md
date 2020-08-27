@@ -1,5 +1,9 @@
 # Changelog
 
+#0.8.0+1
+### Fixed
+- Tags repository not being registered
+
 #0.8.0
 ### Addded
 - Adding repository for tags

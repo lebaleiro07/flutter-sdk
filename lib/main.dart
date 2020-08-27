@@ -1,5 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:music_playce_sdk/core/api/repositories/tags/impl/tags_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/tags/tags_repository.dart';
 import 'package:rxdart/rxdart.dart';
 import 'core/api/environment.dart';
 import 'core/api/interceptors/refresh_token_interceptor.dart';
@@ -52,6 +54,12 @@ class MusicPlayceSdk {
 
     GetIt.instance.registerSingleton<PlaylistsRepository>(
         PlaylistsRepositoryImpl(httpClient: _musicPlayceHttp));
+
+    GetIt.instance.registerSingleton<TagsRepository>(
+      TagsRepositoryImpl(
+        httpClient: _musicPlayceHttp
+      )
+    );
 
     GetIt.instance.registerSingleton<UserRepository>(
         UserRepositoryImpl(httpClient: _musicPlayceHttp));
