@@ -11,4 +11,7 @@ class PostEndpoint {
       "${_env.apiHost}/v1/posts/$postId/indications";
 
   static String like(String postId) => "${_env.apiHost}/v1/posts/$postId/likes";
+
+  static String createPost = "${_env.apiHost}/v1/posts";
+
 }

@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:http/src/response.dart';
+import 'package:music_playce_sdk/core/api/models/posts/create_post_request.dart';
+import 'package:music_playce_sdk/core/api/models/posts/create_post_response.dart';
 
 import '../../../../http/music_playce_http.dart';
 import '../../../endpoints/post_endpoint.dart';
@@ -79,5 +81,15 @@ class PostRepositoryImpl implements PostRepository {
     } catch (e) {
       return left(e);
     }
+  }
+
+  @override
+  Future<CreatePostResponse> createPost(CreatePostRequest createPostRequest) async {
+    final response = await _httpClient.post(
+        PostEndpoint.createPost,
+        body: createPostRequest.toJson(),
+    );
+
+    return CreatePostResponse.fromMap(jsonDecode(response?.body)['data']);
   }
 }
