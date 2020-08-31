@@ -5,7 +5,7 @@ import '../environment.dart';
 class TagsEndpoint {
   static final _env = GetIt.instance<Environment>();
 
-  static final String getAllTags = '${_env.apiHost}/v1/tags/';
+  static String getAllTags = '${_env.apiHost}/v1/tags';
 
   static String getTagById(String tagId) => '${_env.apiHost}/v2/tags/$tagId';
 
@@ -14,4 +14,7 @@ class TagsEndpoint {
 
   static String getAllPostsByTagId(String tagId, [limit = 5]) =>
       '${_env.apiHost}/v1/tags/$tagId/posts?limit=$limit';
+
+  static String createTag = '${_env.apiHost}/v1/tags';
+
 }
