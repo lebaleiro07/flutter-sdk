@@ -9,7 +9,7 @@ import 'music.model.dart';
 import 'release.model.dart';
 import 'tag.model.dart';
 
-class CreatePostResponse {
+class PostCreateUpdatedResponse {
   String idPost;
   String postName;
   String idUploader;
@@ -30,7 +30,7 @@ class CreatePostResponse {
   DateTime datetimeCreated;
   DateTime datetimeUpdated;
 
-  CreatePostResponse({
+  PostCreateUpdatedResponse({
     this.idPost,
     this.postName,
     this.idUploader,
@@ -52,13 +52,13 @@ class CreatePostResponse {
     this.datetimeUpdated,
   });
 
-  factory CreatePostResponse.fromJson(String str) =>
-      CreatePostResponse.fromMap(json.decode(str));
+  factory PostCreateUpdatedResponse.fromJson(String str) =>
+      PostCreateUpdatedResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory CreatePostResponse.fromMap(Map<String, dynamic> json) =>
-      new CreatePostResponse(
+  factory PostCreateUpdatedResponse.fromMap(Map<String, dynamic> json) =>
+      new PostCreateUpdatedResponse(
         idPost: json["_id"] == null ? null : json["_id"],
         postName: json["name"] == null ? null : json["name"],
         idUploader: json["id_uploader"] == null ? null : json["id_uploader"],

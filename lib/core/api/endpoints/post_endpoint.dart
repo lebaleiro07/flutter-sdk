@@ -14,4 +14,6 @@ class PostEndpoint {
 
   static String createPost = "${_env.apiHost}/v1/posts";
 
+  static String updatePost = "${_env.apiHost}/v1/posts";
+
 }
