@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:music_playce_sdk/core/api/models/users/user_update_request.dart';
 
 import '../models/users/user_update_response.model.dart';
 import '../endpoints/user_endpoint.dart';
@@ -27,12 +28,10 @@ abstract class UserRepository {
   /// update a specific user by his ID
   ///
   /// The request is made to [UserEndpoint.updateUser]
-  /// It receive a [User] that contains the new
-  /// content and the [userId]
   ///
   /// It returns a [UserUpdateResponse] object, that is the
   /// updated object
-  Future<UserUpdateResponse> updateUser(User user);
+  Future<UserUpdateResponse> updateUser(UserUpdateRequest userUpdateRequest, String userId);
 
   /// Sends a HTTP request to the user endpoint in order to
   /// get all user's likes by his ID
