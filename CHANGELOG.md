@@ -1,5 +1,9 @@
 # Changelog
 
+#0.9.0+1
+### Fixed
+- Fixing environment error on upload service
+
 #0.9.0
 ### Added
 - Refactoring environment structure

@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
-import 'package:music_playce_sdk/core/api/environment.dart';
+import 'package:music_playce_sdk/core/api/environment/environment.dart';
 import 'package:music_playce_sdk/core/api/services/upload_service/upload_service.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
 
@@ -21,7 +21,7 @@ class UploadServiceImpl implements UploadService {
 
     final client = HttpClient()..connectionTimeout = const Duration(seconds: 10);
 
-    final url = "${GetIt.I<Environment>().apiHost}/v1/media";
+    final url = "${GetIt.I<Environment>().get(EnvironmentKeys.apiHost)}/v1/media";
 
     final request = await client.postUrl(Uri.parse(url));
 
