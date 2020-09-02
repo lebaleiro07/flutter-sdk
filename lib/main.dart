@@ -1,7 +1,11 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:music_playce_sdk/core/api/repositories/poll/impl/poll_repository_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/poll/poll_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/tags/impl/tags_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/tags/tags_repository.dart';
+import 'package:music_playce_sdk/core/api/services/upload_service/upload_service.dart';
+import 'package:music_playce_sdk/core/api/services/upload_service/upload_service_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'core/api/environment.dart';
 import 'core/api/interceptors/refresh_token_interceptor.dart';
@@ -81,6 +85,16 @@ class MusicPlayceSdk {
         BehaviorSubject<RefreshTokenResponse>());
 
     GetIt.instance.registerSingleton<MusicPlayceHttp>(_musicPlayceHttp);
+
+    GetIt.instance.registerSingleton<PollRepository>(
+      PollRepositoryImpl(
+        _musicPlayceHttp
+      )
+    );
+
+    GetIt.instance.registerSingleton<UploadService>(
+      UploadServiceImpl()
+    );
 
     _musicPlayceHttp.interceptors.addAll([
       SetTokenInterceptor(),

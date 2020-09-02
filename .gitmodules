@@ -1,0 +1,3 @@
+[submodule "flutter-share-api"]
+	path = flutter-share-api
+	url = https://gitlab.com/mplayce/mobile/flutter-share-api.git
