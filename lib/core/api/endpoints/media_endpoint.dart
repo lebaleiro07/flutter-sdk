@@ -7,4 +7,6 @@ class MediaEndpoint {
 
   static String uploadMedia = "${_env.apiHost}/v1/media";
 
+  static String getAllMedia = "${_env.apiHost}/v1/media";
+
 }
