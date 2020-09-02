@@ -4,6 +4,8 @@ import 'package:music_playce_sdk/core/api/repositories/poll/impl/poll_repository
 import 'package:music_playce_sdk/core/api/repositories/poll/poll_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/tags/impl/tags_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/tags/tags_repository.dart';
+import 'package:music_playce_sdk/core/api/services/upload_service/upload_service.dart';
+import 'package:music_playce_sdk/core/api/services/upload_service/upload_service_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'core/api/environment.dart';
 import 'core/api/interceptors/refresh_token_interceptor.dart';
@@ -80,6 +82,10 @@ class MusicPlayceSdk {
       PollRepositoryImpl(
         _musicPlayceHttp
       )
+    );
+
+    GetIt.instance.registerSingleton<UploadService>(
+      UploadServiceImpl()
     );
 
     _musicPlayceHttp.interceptors.addAll([

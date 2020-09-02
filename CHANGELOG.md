@@ -1,5 +1,13 @@
 # Changelog
 
+#0.8.2
+### Added
+- Adding a service for deal with upload
+
+#0.8.1
+### Added
+- Adding repository for polls
+
 #0.8.0+1
 ### Fixed
 - Tags repository not being registered
