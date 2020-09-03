@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:music_playce_sdk/core/api/endpoints/tags_endpoint.dart';
+import 'package:music_playce_sdk/core/api/models/posts/create_tag_response.dart';
 
 import '../../../../http/music_playce_http.dart';
 import '../../../../http/music_playce_http_response.dart';
@@ -14,9 +15,10 @@ class TagsRepositoryImpl implements TagsRepository {
 
   TagsRepositoryImpl({@required this.httpClient});
 
+
   @override
-  Future<List<Tag>> getAllTags() async {
-    final request = await httpClient.get(TagsEndpoint.getAllTags);
+  Future<List<Tag>> getAllTags({ int limit = 12 }) async {
+    final request = await httpClient.get("${TagsEndpoint.getAllTags}?limit=$limit");
     final response = json.decode(request?.body)['data'];
 
     final tags = <Tag>[];
@@ -51,6 +53,20 @@ class TagsRepositoryImpl implements TagsRepository {
 
     return posts;
   }
+
+  @override
+  Future<CreateTagResponse> createTag(Tag tag) async {
+    final response = await httpClient.post(
+        TagsEndpoint.createTag,
+        body: {
+          "name": tag.name,
+          "color": tag.color,
+        }
+    );
+
+    return CreateTagResponse.fromMap(jsonDecode(response?.body)['data']);
+  }
+
 
   @override
   Future<MusicPlayceHttpResponse> deleteTag({Tag tag}) {

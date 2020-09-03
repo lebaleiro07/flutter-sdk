@@ -16,6 +16,8 @@ import 'core/api/repositories/impl/notification_repository_impl.dart';
 import 'core/api/repositories/impl/places_repository_impl.dart';
 import 'core/api/repositories/impl/playlists_repository_impl.dart';
 import 'core/api/repositories/impl/user_repository_impl.dart';
+import 'core/api/repositories/media/impl/media_repository_impl.dart';
+import 'core/api/repositories/media/media_repository.dart';
 import 'core/api/repositories/notification_repository.dart';
 import 'core/api/repositories/places_repository.dart';
 import 'core/api/repositories/playlists_repository.dart';
@@ -73,6 +75,12 @@ class MusicPlayceSdk {
       TagsRepositoryImpl(
         httpClient: _musicPlayceHttp
       )
+    );
+
+    GetIt.instance.registerSingleton<MediaRepository>(
+        MediaRepositoryImpl(
+            httpClient: _musicPlayceHttp
+        )
     );
 
     GetIt.instance.registerSingleton<UserRepository>(

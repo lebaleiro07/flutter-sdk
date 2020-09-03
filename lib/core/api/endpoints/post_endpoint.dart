@@ -14,4 +14,9 @@ class PostEndpoint {
       "$_apiHost/v1/posts/$postId/indications";
 
   static String like(String postId) => "$_apiHost/v1/posts/$postId/likes";
+
+  static String createPost = "$_apiHost/v1/posts";
+
+  static String updatePost = "$_apiHost/v1/posts";
+
 }
