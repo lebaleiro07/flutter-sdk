@@ -1,5 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:music_playce_sdk/core/api/environment/environment.dart';
+import 'package:music_playce_sdk/core/api/environment/environment_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/poll/impl/poll_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/poll/poll_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/tags/impl/tags_repository_impl.dart';
@@ -7,7 +9,6 @@ import 'package:music_playce_sdk/core/api/repositories/tags/tags_repository.dart
 import 'package:music_playce_sdk/core/api/services/upload_service/upload_service.dart';
 import 'package:music_playce_sdk/core/api/services/upload_service/upload_service_impl.dart';
 import 'package:rxdart/rxdart.dart';
-import 'core/api/environment.dart';
 import 'core/api/interceptors/refresh_token_interceptor.dart';
 import 'core/api/interceptors/set_token_interceptor.dart';
 import 'core/api/models/auth/refresh_token_response.model.dart';
@@ -34,7 +35,16 @@ import 'core/http/music_playce_http.dart';
 import 'core/http/music_playce_http_headers.dart';
 
 class MusicPlayceSdk {
-  void registerSingletons(Environment environment) {
+  Future<void> registerSingletons(String environment) async {
+    GetIt.instance
+      .registerSingleton<Environment>(
+        EnvironmentImpl()
+      );
+
+    final _env = GetIt.instance<Environment>();
+
+    await _env.load(environment);
+
     GetIt.instance
         .registerSingleton<MusicPlayceHttpHeaders>(MusicPlayceHttpHeaders());
 
@@ -78,8 +88,6 @@ class MusicPlayceSdk {
 
     GetIt.instance.registerSingleton<PlacesRepository>(
         PlacesRepositoryImpl(httpClient: _musicPlayceHttp));
-
-    GetIt.instance.registerSingleton<Environment>(environment);
 
     GetIt.instance.registerSingleton<BehaviorSubject<RefreshTokenResponse>>(
         BehaviorSubject<RefreshTokenResponse>());

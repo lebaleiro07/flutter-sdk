@@ -43,7 +43,7 @@ abstract class PlaylistsRepository {
   /// The request is made to [PlaylistEndpoint.createPlaylist]
   /// It receive a [String] that is a [name]
   ///
-  /// It returns an boolean that shows if playlist was add or not
+  /// It returns an object [UserPlaylists]
   Future<UserPlaylists> createPlaylist(String name);
 
   /// Sends an HTTP request to the playlists endpoint in order to

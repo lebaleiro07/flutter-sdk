@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:music_playce_sdk/core/api/models/users/user_update_request.dart';
 
 import '../../../http/music_playce_http.dart';
 import '../../models/users/user_update_response.model.dart';
@@ -32,15 +33,16 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<UserUpdateResponse> updateUser(User user) async {
+  Future<UserUpdateResponse> updateUser(UserUpdateRequest userUpdateRequest, String userId) async {
     final response = await httpClient.put(
-      UserEndpoint.updateUser(user.id),
+      UserEndpoint.updateUser(userId),
       body: {
-        "name": user.name,
-        "picture_cover": user.pictureCover,
-        "picture_profile": user.pictureProfile,
-        "location": user.location,
-        "description": user.description,
+        "name": userUpdateRequest.name,
+        "description": userUpdateRequest.description,
+        "location": userUpdateRequest.location,
+        "phone": userUpdateRequest.phone,
+        "id_picture_cover": userUpdateRequest.idPictureCover,
+        "id_picture_profile":userUpdateRequest.idPictureProfile,
       }
     );
 
