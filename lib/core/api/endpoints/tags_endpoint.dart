@@ -7,7 +7,7 @@ class TagsEndpoint {
 
   static final _apiHost = _env.get(EnvironmentKeys.apiHost);
 
-  static final String getAllTags = '$_apiHost/v1/tags/';
+  static String getAllTags = '$_apiHost/v1/tags';
 
   static String getTagById(String tagId) => '$_apiHost/v2/tags/$tagId';
 
@@ -16,4 +16,7 @@ class TagsEndpoint {
 
   static String getAllPostsByTagId(String tagId, [limit = 5]) =>
       '$_apiHost/v1/tags/$tagId/posts?limit=$limit';
+
+  static String createTag = '$_apiHost/v1/tags';
+
 }

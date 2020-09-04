@@ -4,6 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/src/response.dart';
 import 'package:music_playce_sdk/core/api/models/posts/share.model.dart';
+import 'package:music_playce_sdk/core/api/models/posts/create_post_request.dart';
+import 'package:music_playce_sdk/core/api/models/posts/post_created_updated_response.dart';
+import 'package:music_playce_sdk/core/api/models/posts/update_post_request.dart';
 
 import '../../../../http/music_playce_http.dart';
 import '../../../endpoints/post_endpoint.dart';
@@ -98,4 +101,25 @@ class PostRepositoryImpl implements PostRepository {
       return left(e);
     }
   }
+  Future<PostCreateUpdatedResponse> createPost(CreatePostRequest createPostRequest) async {
+    final response = await _httpClient.post(
+        PostEndpoint.createPost,
+        body: createPostRequest.toJson(),
+    );
+
+    return PostCreateUpdatedResponse.fromMap(jsonDecode(response?.body)['data']);
+  }
+
+  @override
+  Future<PostCreateUpdatedResponse> updatePost(UpdatePostRequest updatePostRequest) async {
+    final response = await _httpClient.put(
+      PostEndpoint.updatePost,
+      body: updatePostRequest.toJson(),
+    );
+
+    return PostCreateUpdatedResponse.fromMap(jsonDecode(response?.body)['data']);
+  }
+
+
+
 }
