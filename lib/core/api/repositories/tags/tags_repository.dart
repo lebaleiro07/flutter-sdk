@@ -37,4 +37,8 @@ abstract class TagsRepository {
   ///
   /// It returns a [CreateTagResponse] object
   Future<CreateTagResponse> createTag(Tag tag);
+
+  /// Returns a [List] which contains all [Tags] found searching by the tag
+  /// name
+  Future<List<Tag>> searchATagByName(String tagName, {int limit = 5});
 }
