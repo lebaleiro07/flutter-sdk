@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/models/posts/share.model.dart';
 
 import '../../models/cursor.dart';
 import '../../models/posts/indication.model.dart';
@@ -19,4 +21,6 @@ abstract class PostRepository {
   Future<Either<Exception, Like>> like(String postId);
 
   Future<Either<Exception, Response>> dislike(String postId);
+
+  Future<Either<Exception, Share>> share(String postId, { @required String target, @required int playbackMoment });
 }

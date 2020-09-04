@@ -35,7 +35,8 @@ class MusicPlayceHttpRequest extends Request {
 
     map.forEach((key, value) {
       if (value != null) {
-        final parsedValue = value is bool ? value.toString() : value;
+        final needParse = value is bool || value is int;
+        final parsedValue = needParse ? value.toString() : value;
 
         pairs.add([
           Uri.encodeQueryComponent(key, encoding: encoding),

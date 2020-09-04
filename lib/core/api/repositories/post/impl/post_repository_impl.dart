@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/src/response.dart';
+import 'package:music_playce_sdk/core/api/models/posts/share.model.dart';
 
 import '../../../../http/music_playce_http.dart';
 import '../../../endpoints/post_endpoint.dart';
@@ -77,6 +79,22 @@ class PostRepositoryImpl implements PostRepository {
 
       return right(response);
     } catch (e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Share>> share(String postId, { @required String target, @required int playbackMoment }) async {
+    try {
+      final response = await _httpClient.post(PostEndpoint.share(postId), body: {
+        "target": target,
+        "playback_moment": playbackMoment
+      });
+
+      final json = jsonDecode(response?.body)['data'];
+
+      return right(Share.fromJson(json));
+    } catch(e) {
       return left(e);
     }
   }
