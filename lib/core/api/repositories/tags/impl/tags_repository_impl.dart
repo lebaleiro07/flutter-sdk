@@ -55,10 +55,9 @@ class TagsRepositoryImpl implements TagsRepository {
   }
 
   @override
-  Future<CreateTagResponse> createTag(Tag tag) async {
+  Future<CreateTagResponse> createTag(String name) async {
     final response = await httpClient.post(TagsEndpoint.createTag, body: {
-      "name": tag.name,
-      "color": tag.color,
+      "name": name,
     });
 
     return CreateTagResponse.fromMap(jsonDecode(response?.body)['data']);
@@ -68,7 +67,6 @@ class TagsRepositoryImpl implements TagsRepository {
   Future<List<Tag>> searchATagByName(String tagName, {int limit = 5}) async {
     final request = await httpClient
         .get("${TagsEndpoint.searchATagByName(tagName)}?limit=$limit");
-
 
     final response = json.decode(request?.body)['data'];
 

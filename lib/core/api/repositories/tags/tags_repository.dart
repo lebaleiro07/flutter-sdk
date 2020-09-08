@@ -33,10 +33,9 @@ abstract class TagsRepository {
   /// create a tag
   ///
   /// The request is made to [TagsEndpoint.createTag]
-  /// It receive a [Tag] object
   ///
   /// It returns a [CreateTagResponse] object
-  Future<CreateTagResponse> createTag(Tag tag);
+  Future<CreateTagResponse> createTag(String name);
 
   /// Returns a [List] which contains all [Tags] found searching by the tag
   /// name
