@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/models/posts/share.model.dart';
 import 'package:music_playce_sdk/core/api/endpoints/post_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/posts/create_post_request.dart';
 import 'package:music_playce_sdk/core/api/models/posts/post_created_updated_response.dart';
@@ -24,6 +26,7 @@ abstract class PostRepository {
 
   Future<Either<Exception, Response>> dislike(String postId);
 
+  Future<Either<Exception, Share>> share(String postId, { @required String target, @required int playbackMoment });
   /// Sends an HTTP request to the post endpoint in order to
   /// create a post
   ///

@@ -1,5 +1,11 @@
 # Changelog
 
+#0.9.1
+### Added
+- Adding media repository
+- Adding create and update actions to post repository
+- Adding share action to post repository
+
 #0.9.0+1
 ### Fixed
 - Fixing environment error on upload service
