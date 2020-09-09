@@ -19,4 +19,7 @@ class TagsEndpoint {
 
   static String createTag = '$_apiHost/v1/tags';
 
+  static String searchATagByName(String tagName) =>
+      '$_apiHost/v1/tags/$tagName';
+
 }
