@@ -19,17 +19,17 @@ class MediaRepositoryImpl implements MediaRepository {
       {String userId, int limit = 8, String page}) async {
     try {
       final result = await httpClient.get(
-          "${MediaEndpoint.getAllMedia}?limit=$limit&id_profile=$userId" +
+          "${MediaEndpoint.getAllMedia}?id_profile=$userId&limit=$limit" +
               (page != null ? "&next=$page" : ""));
 
       final data = jsonDecode(result.body);
 
-      final media =
-      data['data'].map<Media>((post) => Media.fromMap(post)).toList();
+      final medias =
+      data['data'].map<Media>((media) => Media.fromMap(media)).toList();
 
       final cursor = Cursor.fromMap(data['cursor']);
 
-      return right(DataWithCursor<Media>(cursor: cursor, data: media));
+      return right(DataWithCursor<Media>(cursor: cursor, data: medias));
     } catch (e, s) {
       return left(e);
     }
