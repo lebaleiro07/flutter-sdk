@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/models/posts/play.dart';
 import 'package:music_playce_sdk/core/api/models/posts/share.model.dart';
 import 'package:music_playce_sdk/core/api/endpoints/post_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/posts/create_post_request.dart';
@@ -44,4 +45,6 @@ abstract class PostRepository {
   ///
   /// This will return a [PostCreateUpdatedResponse]
   Future<PostCreateUpdatedResponse> updatePost(UpdatePostRequest updatePostRequest);
+
+  Future<Either<Exception, Response>> play(Play play);
 }

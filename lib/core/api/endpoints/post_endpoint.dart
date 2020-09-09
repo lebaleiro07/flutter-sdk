@@ -21,4 +21,6 @@ class PostEndpoint {
 
   static String updatePost = "$_apiHost/v1/posts";
 
+  static String play(String postId) => "$_apiHost/v1/posts/$postId/plays";
+
 }

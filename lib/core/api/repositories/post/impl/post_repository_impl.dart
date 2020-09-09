@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/src/response.dart';
+import 'package:music_playce_sdk/core/api/models/posts/play.dart';
 import 'package:music_playce_sdk/core/api/models/posts/share.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/create_post_request.dart';
 import 'package:music_playce_sdk/core/api/models/posts/post_created_updated_response.dart';
@@ -120,6 +121,17 @@ class PostRepositoryImpl implements PostRepository {
     return PostCreateUpdatedResponse.fromMap(jsonDecode(response?.body)['data']);
   }
 
+  @override
+  Future<Either<Exception, Response>> play(Play play) async {
+    try {
+      final response = await _httpClient.post(PostEndpoint.play(play.post.id), body: {
+        'listen_time': play.milliseconds.toString()
+      });
 
+      return right(response);
+    } catch(e) {
 
+      return left(e);
+    }
+  }
 }
