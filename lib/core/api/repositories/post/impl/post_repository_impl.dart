@@ -130,7 +130,6 @@ class PostRepositoryImpl implements PostRepository {
 
       return right(response);
     } catch(e) {
-
       return left(e);
     }
   }
