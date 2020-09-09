@@ -29,4 +29,7 @@ class UserEndpoint {
   static String checkPhone = "$_apiHost/v2/users/check-phone";
 
   static String getTerm(String name) => "$_apiHost/v1/terms/$name";
+
+  static String getAllUsersByName(String name) => "$_apiHost/v1/users/find/$name";
+
 }

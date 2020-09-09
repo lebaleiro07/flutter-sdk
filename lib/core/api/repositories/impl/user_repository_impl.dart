@@ -105,7 +105,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Exception, List<User>>> search(String query, { int limit = 5 }) async {
     try {
       final response = await httpClient.get(
-        "${SearchEndpoint.search}?query=$query&limit=$limit"
+        "${UserEndpoint.getAllUsersByName(query)}?limit=$limit"
       );
 
       final json = jsonDecode(response?.body)['data'];
