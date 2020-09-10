@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:music_playce_sdk/core/api/models/posts/hexColor.dart';
 
 class Tag {
   String id;
@@ -32,16 +33,4 @@ class Tag {
         "color": color == null ? null : '#${color.value.toRadixString(16)}',
         "type" : type == null ? null : type,
       };
-}
-
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
