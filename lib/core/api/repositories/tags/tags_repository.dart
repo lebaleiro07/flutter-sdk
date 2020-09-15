@@ -8,7 +8,7 @@ import '../../models/posts/tag.model.dart';
 
 abstract class TagsRepository {
   /// Returns a [List] which contains all [Tag]
-  Future<List<Tag>> getAllTags({ int limit = 12 });
+  Future<List<Tag>> getAllTags({int limit = 12});
 
   /// Returns a specific [Tag] using it's [tagId], and returns a [Tag] as a response
   Future<Tag> getTagById(String tagId);
