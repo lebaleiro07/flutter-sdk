@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as fss;
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart/subjects.dart';
 
 import '../../http/music_playce_http.dart';
 import '../../http/music_playce_http_headers.dart';
