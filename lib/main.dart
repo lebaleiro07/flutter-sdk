@@ -105,8 +105,6 @@ class MusicPlayceSdk {
     GetIt.instance.registerSingleton<UploadService>(
       UploadServiceImpl()
     );
-    GetIt.instance.registerSingleton<TagsRepository>(
-        TagsRepositoryImpl(httpClient: _musicPlayceHttp));
 
     _musicPlayceHttp.interceptors.addAll([
       SetTokenInterceptor(),
