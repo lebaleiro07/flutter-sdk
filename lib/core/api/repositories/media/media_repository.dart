@@ -18,4 +18,6 @@ abstract class MediaRepository {
   Future<Either<Exception, DataWithCursor<Media>>> getAllMedia(
       {String userId, int limit = 8, String page});
 
+  Future<Media> getMediaById(String mediaId);
+
 }

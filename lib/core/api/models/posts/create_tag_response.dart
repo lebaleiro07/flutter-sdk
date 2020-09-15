@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:music_playce_sdk/core/api/models/posts/hexColor.dart';
 import 'package:music_playce_sdk/core/api/models/posts/meta.model.dart';
 
 class CreateTagResponse {
@@ -61,16 +62,4 @@ class CreateTagResponse {
             datetimeUpdated == null ? null : datetimeUpdated.toIso8601String(),
         "_id": tagId == null ? null : tagId,
       };
-}
-
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
