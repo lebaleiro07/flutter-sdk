@@ -105,7 +105,7 @@ class PostRepositoryImpl implements PostRepository {
   Future<PostCreateUpdatedResponse> createPost(CreatePostRequest createPostRequest) async {
     final response = await _httpClient.post(
         PostEndpoint.createPost,
-        body: createPostRequest.toJson(),
+        body: createPostRequest.toMap(),
     );
 
     return PostCreateUpdatedResponse.fromMap(jsonDecode(response?.body)['data']);
