@@ -1,5 +1,9 @@
 # Changelog
 
+#0.9.2
+### Added
+- Adding play action to post repository
+
 #0.9.1
 ### Added
 - Adding media repository
