@@ -35,4 +35,15 @@ class MediaRepositoryImpl implements MediaRepository {
     }
   }
 
+  @override
+  Future<Media> getMediaById(String mediaId) async {
+    final response = await httpClient.get(
+      MediaEndpoint.getMediaById(mediaId),
+    );
+
+    return Media.fromMap(jsonDecode(response?.body)['data']);
+  }
+
+
+
 }

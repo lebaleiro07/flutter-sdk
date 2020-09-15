@@ -10,4 +10,6 @@ class MediaEndpoint {
 
   static String getAllMedia = "$_apiHost/v1/media";
 
+  static String getMediaById(String mediaId) => "$_apiHost/v1/media/$mediaId";
+
 }
