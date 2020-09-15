@@ -1,5 +1,9 @@
 # Changelog
 
+#0.9.3
+### Fixed
+- Deprecated way of using environment on tag repository
+
 #0.9.2
 ### Added
 - Adding play action to post repository
