@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:music_playce_sdk/core/api/endpoints/media_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/cursor.dart';
+import 'package:music_playce_sdk/core/api/models/media/draft.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/media.model.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
 import '../media_repository.dart';
@@ -10,28 +10,26 @@ import '../media_repository.dart';
 class MediaRepositoryImpl implements MediaRepository {
   final MusicPlayceHttp httpClient;
 
-  MediaRepositoryImpl({
-    @required this.httpClient
-  });
+  MediaRepositoryImpl({@required this.httpClient});
 
   @override
-  Future<Either<Exception, DataWithCursor<Media>>> getAllMedia(
+  Future<DataWithCursor<Draft>> getAllDrafts(
       {String userId, int limit = 8, String page}) async {
     try {
       final result = await httpClient.get(
-          "${MediaEndpoint.getAllMedia}?id_profile=$userId&limit=$limit" +
+          "${MediaEndpoint.getAllDrafts(userId)}?limit=$limit" +
               (page != null ? "&next=$page" : ""));
 
       final data = jsonDecode(result.body);
 
-      final medias =
-      data['data'].map<Media>((media) => Media.fromMap(media)).toList();
+      final drafts =
+          data['data'].map<Draft>((draft) => Draft.fromMap(draft)).toList();
 
       final cursor = Cursor.fromMap(data['cursor']);
 
-      return right(DataWithCursor<Media>(cursor: cursor, data: medias));
+      return DataWithCursor<Draft>(cursor: cursor, data: drafts);
     } catch (e, s) {
-      return left(e);
+      return e;
     }
   }
 
@@ -43,7 +41,4 @@ class MediaRepositoryImpl implements MediaRepository {
 
     return Media.fromMap(jsonDecode(response?.body)['data']);
   }
-
-
-
 }
