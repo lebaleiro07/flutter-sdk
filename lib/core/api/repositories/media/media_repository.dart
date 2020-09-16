@@ -20,4 +20,5 @@ abstract class MediaRepository {
 
   Future<Media> getMediaById(String mediaId);
 
+  Future<dynamic> deleteAMedia(String mediaId);
 }
