@@ -21,7 +21,25 @@ abstract class MusicPlayceException implements Exception {
     return null;
   }
 
+  String get _parsedMessage {
+    if (json.containsKey('error')) {
+      if (json['error'].containsKey('message')) {
+        return json['error']['message'];
+      }
+    } else if (json.containsKey('data')) {
+      if (json['data'].containsKey('message')) {
+        return json['data']['message'];
+      } else if (json['data'].containsKey('message')) {
+        return json['data']['message']['code'];
+      }
+    }
+
+    return null;
+  }
+
   String get code => _parsedCode;
+
+  String get info => _parsedMessage;
 
   @override
   String toString() => message;
