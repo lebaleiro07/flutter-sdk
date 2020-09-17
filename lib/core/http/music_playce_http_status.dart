@@ -17,6 +17,8 @@ class MusicPlayceHttpStatus {
 
   static const int tooManyRequest = 429;
 
+  static const int notAcceptable = 406;
+
   static const int unknownError = 500;
 }
 
@@ -40,4 +42,6 @@ class HttpExceptionCodes {
   static const String tooManyRequest = "error__many-request";
 
   static const String unknownError = "error__unknown";
+
+  static const String notAcceptable = "error__not-acceptable";
 }

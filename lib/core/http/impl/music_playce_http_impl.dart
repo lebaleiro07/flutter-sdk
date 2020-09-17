@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:music_playce_sdk/core/api/exceptions/http/not_acceptable_exception.dart';
 
 import '../../api/exceptions/http/bad_request_exception.dart';
 import '../../api/exceptions/http_exceptions.dart';
@@ -83,6 +84,9 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor
       } else if (lastStatusCode == MusicPlayceHttpStatus.unknownError) {
         throw UnknownErrorException(HttpExceptionCodes.unknownError,
             json: jsonDecode(response?.body));
+      } else if (lastStatusCode == MusicPlayceHttpStatus.notAcceptable) {
+        throw NotAcceptableException(HttpExceptionCodes.notAcceptable, 
+        json: jsonDecode(response?.body));
       } else if (lastStatusCode == MusicPlayceHttpStatus.unprocessableEntity) {
         throw UnprocessableEntityException(
             HttpExceptionCodes.unprocessableEntity,
