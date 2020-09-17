@@ -54,12 +54,12 @@ class CreatePostRequest {
         "id_picture": idPicture == null ? null : idPicture,
         "id_composers": idComposers == null
             ? null
-            : List<String>.from(idComposers.map((x) => x)),
+            : jsonEncode(idComposers),
         "id_interpreters": idInterpreters == null
             ? null
-            : List<String>.from(idInterpreters.map((x) => x)),
+            : jsonEncode(idInterpreters),
         "id_tags":
-            idTags == null ? null : List<String>.from(idTags.map((x) => x)),
+            idTags == null ? null : jsonEncode(idTags),
         "lyrics": lyrics == null ? null : lyrics,
         "accepted_terms": acceptedTerms == null ? null : acceptedTerms,
       };

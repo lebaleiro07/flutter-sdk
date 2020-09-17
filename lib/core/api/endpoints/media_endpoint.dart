@@ -8,8 +8,10 @@ class MediaEndpoint {
 
   static final _apiHost = _env.get(EnvironmentKeys.apiHost);
 
-  static String getAllMedia = "$_apiHost/v1/media";
+  static String getAllDrafts(String userId) =>
+      "$_apiHost/v1/media/drafts/$userId";
 
   static String getMediaById(String mediaId) => "$_apiHost/v1/media/$mediaId";
 
+  static String deleteAMedia(String mediaId) => "$_apiHost/v1/media/$mediaId";
 }
