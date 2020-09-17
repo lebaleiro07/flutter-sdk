@@ -1,5 +1,14 @@
 # Changelog
 
+#0.9.4
+### Added
+- Adding http exception for 406 status code
+- Adding delete media to post repository
+
+#0.9.3+1
+### Fixed
+- Removing duplicate singleton registration for tags repository
+
 #0.9.3
 ### Fixed
 - Deprecated way of using environment on tag repository
