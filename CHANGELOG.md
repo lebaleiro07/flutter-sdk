@@ -1,5 +1,9 @@
 # Changelog
 
+#0.9.5
+### Added
+- Adding onComplete and onError callbacks to UploadService.upload
+
 #0.9.4
 ### Added
 - Adding http exception for 406 status code

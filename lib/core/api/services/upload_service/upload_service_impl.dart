@@ -11,10 +11,15 @@ import 'package:music_playce_sdk/core/http/music_playce_http_headers.dart';
 
 typedef void OnUploadProgressCallback(int sentBytes, int totalBytes);
 
+typedef void OnErrorCallback(Exception error);
+
+typedef void OnCompleteUpload(String mediaId);
 
 class UploadServiceImpl implements UploadService {
   upload(MultipartFile multipart,  {
-    @required OnUploadProgressCallback onProgressCallback
+    @required OnUploadProgressCallback onProgressCallback,
+    OnCompleteUpload onComplete,
+    OnErrorCallback onError
   }) async {
     final header = GetIt.I<MusicPlayceHttpHeaders>()
       .headers;
@@ -79,15 +84,15 @@ class UploadServiceImpl implements UploadService {
         final mediaId = json
             .decode(await _readResponseAsString(httpResponse))['data']['_id']
             .toString();
-        Map<String, dynamic> respMap = {'id': mediaId, 'status': 200};
         
-        return respMap;
+        
+        if (onComplete != null) {
+          onComplete(mediaId);
+        }
       } catch (e) {
-        print("Exception trows on MediaService.fileUploadMultipart: $e");
-        
-        Map<String, dynamic> respMap = {'status': -1};
-
-        return respMap;
+        if (onError != null) {
+          onError(e);
+        }
       }
     }
   }
