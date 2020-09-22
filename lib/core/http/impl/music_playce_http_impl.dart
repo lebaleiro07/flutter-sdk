@@ -224,7 +224,10 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor
   List<MusicPlayceHttpInterceptorWrapper> get interceptors => _interceptors;
 
   @override
-  void close() {
-    close();
+  set contentLength(int length) {
+    this.contentLength = length;
   }
+
+  @override
+  void close() => _client.close();
 }

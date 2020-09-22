@@ -27,4 +27,8 @@ abstract class MusicPlayceHttp {
       {body, Map<String, String> headers, Encoding encoding});
 
   Future<Response> head(url, {Map<String, String> headers});
+
+  set contentLength(int length);
+
+  void close();
 }

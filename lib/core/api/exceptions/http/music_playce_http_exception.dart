@@ -28,6 +28,10 @@ abstract class MusicPlayceException implements Exception {
       }
     } else if (json.containsKey('data')) {
       if (json['data'].containsKey('message')) {
+        if (json['data']['message'].containsKey('message')) {
+          return json['data']['message']['message'];
+        }
+
         return json['data']['message'];
       } else if (json['data'].containsKey('message')) {
         return json['data']['message']['code'];
