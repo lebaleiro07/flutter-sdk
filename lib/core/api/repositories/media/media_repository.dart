@@ -23,7 +23,5 @@ abstract class MediaRepository {
 
   Future<void> deleteAMedia(String mediaId);
 
-  Future<DataWithCursor<Genre>> getAllGenres({int limit = 10, String page});
-
   Future<List<Genre>> searchAGenreByName(String genreName, {int limit = 5});
 }
