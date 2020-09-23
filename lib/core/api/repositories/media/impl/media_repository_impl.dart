@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:music_playce_sdk/core/api/endpoints/media_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/cursor.dart';
 import 'package:music_playce_sdk/core/api/models/media/draft.model.dart';
+import 'package:music_playce_sdk/core/api/models/media/genre.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/media.model.dart';
 import 'package:music_playce_sdk/core/http/music_playce_http.dart';
+import '../../../endpoints/media_endpoint.dart';
 import '../media_repository.dart';
 
 class MediaRepositoryImpl implements MediaRepository {
@@ -52,5 +54,43 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, s) {
       return e;
     }
+  }
+
+  @override
+  Future<DataWithCursor<Genre>> getAllGenres(
+      {int limit = 10, String page}) async {
+    try {
+      final result = await httpClient.get(
+          "${MediaEndpoint.getAllGenres}?limit=$limit" +
+              (page != null ? "&next=$page" : ""));
+
+      final data = jsonDecode(result.body);
+
+      final genres =
+          data['data'].map<Genre>((genre) => Genre.fromMap(genre)).toList();
+
+      final cursor = Cursor.fromMap(data['cursor']);
+
+      return DataWithCursor<Genre>(cursor: cursor, data: genres);
+    } catch (e, s) {
+      return e;
+    }
+  }
+
+  @override
+  Future<List<Genre>> searchAGenreByName(String genreName,
+      {int limit = 5}) async {
+    final request = await httpClient.get(
+      "${MediaEndpoint.searchGenre(genreName)}?limit=$limit",
+    );
+
+    final response = json.decode(request?.body)['data'];
+
+    final genres = <Genre>[];
+
+    for (var item in response) {
+      genres.add(Genre.fromMap(item));
+    }
+    return genres;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:music_playce_sdk/core/api/endpoints/media_endpoint.dart';
 import 'package:music_playce_sdk/core/api/models/cursor.dart';
 import 'package:music_playce_sdk/core/api/models/media/draft.model.dart';
+import 'package:music_playce_sdk/core/api/models/media/genre.model.dart';
 import 'package:music_playce_sdk/core/api/models/posts/media.model.dart';
 
 /// The abstract class for MediaRepository
@@ -21,4 +22,8 @@ abstract class MediaRepository {
   Future<Media> getMediaById(String mediaId);
 
   Future<dynamic> deleteAMedia(String mediaId);
+
+  Future<DataWithCursor<Genre>> getAllGenres({int limit = 10, String page});
+
+  Future<List<Genre>> searchAGenreByName(String genreName, {int limit = 5});
 }

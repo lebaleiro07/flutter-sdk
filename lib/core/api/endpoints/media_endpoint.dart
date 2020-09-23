@@ -14,4 +14,9 @@ class MediaEndpoint {
   static String getMediaById(String mediaId) => "$_apiHost/v1/media/$mediaId";
 
   static String deleteAMedia(String mediaId) => "$_apiHost/v1/media/$mediaId";
+
+  static String getAllGenres = "$_apiHost/v1/media/genres";
+
+  static String searchGenre(String genreName) =>
+      "$_apiHost/v1/media/search/genres/$genreName";
 }
