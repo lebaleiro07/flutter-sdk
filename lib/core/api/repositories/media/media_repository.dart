@@ -21,7 +21,7 @@ abstract class MediaRepository {
 
   Future<Media> getMediaById(String mediaId);
 
-  Future<dynamic> deleteAMedia(String mediaId);
+  Future<void> deleteAMedia(String mediaId);
 
   Future<DataWithCursor<Genre>> getAllGenres({int limit = 10, String page});
 

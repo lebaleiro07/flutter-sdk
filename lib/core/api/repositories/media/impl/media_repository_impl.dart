@@ -45,12 +45,11 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<dynamic> deleteAMedia(String mediaId) async {
+  Future<void> deleteAMedia(String mediaId) async {
     try {
       final response =
           await httpClient.delete(MediaEndpoint.deleteAMedia(mediaId));
       final data = jsonDecode(response?.body)['data'];
-      return data;
     } catch (e, s) {
       return e;
     }
