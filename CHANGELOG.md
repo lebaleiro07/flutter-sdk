@@ -1,5 +1,10 @@
 # Changelog
 
+
+#1.0.0
+### Added
+- Adding genre endpoints to media repository
+
 #0.9.7
 ### Added
 - Adding audio repository
