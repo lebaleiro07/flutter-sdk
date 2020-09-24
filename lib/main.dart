@@ -2,6 +2,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:music_playce_sdk/core/api/environment/environment.dart';
 import 'package:music_playce_sdk/core/api/environment/environment_impl.dart';
+import 'package:music_playce_sdk/core/api/repositories/audio/audio_repository.dart';
+import 'package:music_playce_sdk/core/api/repositories/audio/impl/audio_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/poll/impl/poll_repository_impl.dart';
 import 'package:music_playce_sdk/core/api/repositories/poll/poll_repository.dart';
 import 'package:music_playce_sdk/core/api/repositories/tags/impl/tags_repository_impl.dart';
@@ -99,6 +101,13 @@ class MusicPlayceSdk {
     GetIt.instance.registerSingleton<PollRepository>(
       PollRepositoryImpl(
         _musicPlayceHttp
+      )
+    );
+
+    GetIt.instance.registerSingleton<AudioRepository>(
+      AudioRepositoryImpl(
+        httpClient: _musicPlayceHttp,
+        postRepository: GetIt.instance<PostRepository>()
       )
     );
 

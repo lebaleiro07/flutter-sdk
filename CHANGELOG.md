@@ -1,5 +1,13 @@
 # Changelog
 
+#0.9.7
+### Added
+- Adding audio repository
+
+#0.9.6
+### Added
+- Adding info field to MusicPlayce http exception class
+
 #0.9.5
 ### Added
 - Adding onComplete and onError callbacks to UploadService.upload
