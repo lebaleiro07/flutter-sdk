@@ -103,12 +103,17 @@ class PostRepositoryImpl implements PostRepository {
     }
   }
   Future<PostCreateUpdatedResponse> createPost(CreatePostRequest createPostRequest) async {
-    final response = await _httpClient.post(
+    try {
+      final response = await _httpClient.post(
         PostEndpoint.createPost,
         body: createPostRequest.toMap(),
-    );
+      );
 
-    return PostCreateUpdatedResponse.fromMap(jsonDecode(response?.body)['data']);
+      return PostCreateUpdatedResponse.fromMap(
+          jsonDecode(response?.body)['data']);
+    } catch(e, s) {
+      throw(e);
+    }
   }
 
   @override
