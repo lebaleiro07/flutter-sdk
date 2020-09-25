@@ -56,19 +56,23 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<List<Genre>> searchAGenreByName(String genreName,
-      {int limit = 5}) async {
-    final request = await httpClient.get(
-      "${MediaEndpoint.searchGenre}?limit=$limit&filter=$genreName",
-    );
+  Future<DataWithCursor<Genre>> searchAGenreByName(String genreName,
+      {int limit = 10, String page}) async {
+    try {
+      final result = await httpClient.get(
+          "${MediaEndpoint.searchGenre}?limit=$limit&filter=$genreName" +
+              (page != null ? "&page=$page" : ""));
 
-    final response = json.decode(request?.body)['data'];
+      final data = jsonDecode(result.body);
 
-    final genres = <Genre>[];
+      final genres =
+          data['data'].map<Genre>((genre) => Genre.fromMap(genre)).toList();
 
-    for (var item in response) {
-      genres.add(Genre.fromMap(item));
+      final cursor = Cursor.fromMap(data['cursor']);
+
+      return DataWithCursor<Genre>(cursor: cursor, data: genres);
+    } catch (e, s) {
+      return e;
     }
-    return genres;
   }
 }
