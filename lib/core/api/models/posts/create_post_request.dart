@@ -6,7 +6,9 @@ class CreatePostRequest {
   String idPicture;
   List<String> idComposers;
   List<String> idInterpreters;
+  List<String> idRelatedArtists;
   List<String> idTags;
+  List<String> idGenres;
   String lyrics;
   int acceptedTerms;
 
@@ -16,7 +18,9 @@ class CreatePostRequest {
     this.idPicture,
     this.idComposers,
     this.idInterpreters,
+    this.idRelatedArtists,
     this.idTags,
+    this.idGenres,
     this.lyrics,
     this.acceptedTerms,
   });
@@ -37,9 +41,15 @@ class CreatePostRequest {
         idInterpreters: json["id_interpreters"] == null
             ? null
             : List<String>.from(json["id_interpreters"].map((x) => x)),
+        idRelatedArtists: json["id_related_artists"] == null
+            ? null
+            : List<String>.from(json["id_related_artists"].map((x) => x)),
         idTags: json["id_tags"] == null
             ? null
             : List<String>.from(json["id_tags"].map((x) => x)),
+        idGenres: json["id_genres"] == null
+            ? null
+            : List<String>.from(json["id_genres"].map((x) => x)),
         lyrics: json["lyrics"] == null ? null : json["lyrics"],
         acceptedTerms: json["accepted_terms"] == null
             ? null
@@ -58,8 +68,11 @@ class CreatePostRequest {
         "id_interpreters": idInterpreters == null
             ? null
             : jsonEncode(idInterpreters),
+        "id_related_artists":
+            idRelatedArtists == null ? null : jsonEncode(idRelatedArtists),
         "id_tags":
             idTags == null ? null : jsonEncode(idTags),
+        "id_genres": idGenres == null ? null : jsonEncode(idGenres),
         "lyrics": lyrics == null ? null : lyrics,
         "accepted_terms": acceptedTerms == null ? null : acceptedTerms,
       };
