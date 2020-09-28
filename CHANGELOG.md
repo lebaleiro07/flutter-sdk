@@ -1,5 +1,9 @@
 # Changelog
 
+#1.0.1
+### Added
+- Adding cursor to search for genre
+
 #1.0.0+1
 ### Changed
 - Removing unused prints
