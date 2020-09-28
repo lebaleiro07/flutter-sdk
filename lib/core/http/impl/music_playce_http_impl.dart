@@ -101,8 +101,8 @@ class MusicPlayceHttpImpl extends MusicPlayceHttpInterceptor
     } on TimeoutException catch (e, s) {
       return Response(jsonEncode({"data": "timeout exception"}), 408);
     } catch (e, s) {
-      print(e);
-      print(s);
+      // print(e);
+      // print(s);
       throw e;
     }
   }
