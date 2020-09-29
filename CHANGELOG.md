@@ -1,5 +1,9 @@
 # Changelog
 
+#1.0.2
+### Added
+- Adding analytics models
+
 #1.0.1
 ### Added
 - Adding cursor to search for genre
