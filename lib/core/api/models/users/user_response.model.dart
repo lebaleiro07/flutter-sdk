@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 
-import 'package:music_playce_sdk/core/api/models/users/UserPictures.dart';
+import 'package:music_playce_sdk/core/api/models/users/user_pictures.dart';
 import 'package:music_playce_sdk/core/api/models/users/follows.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_roles.model.dart';
 
@@ -42,6 +43,8 @@ class User {
   DateTime profileDatetimeCreated;
   DateTime profileDatetimeUpdated;
   UserPictures userPictures;
+  String email;
+  String phone;
 
   User({
     this.id,
@@ -81,6 +84,8 @@ class User {
     this.profileDatetimeCreated,
     this.profileDatetimeUpdated,
     this.userPictures,
+    this.email,
+    this.phone,
   });
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
@@ -184,6 +189,8 @@ class User {
         userPictures: json["picture"] == null
             ? null
             : UserPictures.fromMap(json["picture"]),
+        email: json["email"] == null ? null : json["email"],
+        phone: json["phone"] == null ? null : json["phone"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -234,5 +241,7 @@ class User {
             ? null
             : profileDatetimeUpdated.toIso8601String(),
         "picture": userPictures == null ? null : userPictures.toMap(),
+        "email": email == null ? null : email,
+        "phone": phone == null ? null : phone,
       };
 }
