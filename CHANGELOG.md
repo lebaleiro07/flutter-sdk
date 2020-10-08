@@ -176,3 +176,8 @@
 ### Added
 - Initial version
 - Add auth routes
+
+## 0.1.0+1
+### Changed
+- User model
+- Get user endpoint
