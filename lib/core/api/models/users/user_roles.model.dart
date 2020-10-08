@@ -42,6 +42,8 @@ class UserRoles {
         datetimeUpdated: json["datetime_updated"] == null
             ? null
             : DateTime.parse(json["datetime_updated"]),
+        quotas:
+            json["quotas"] == null ? null : UserQuotas.fromMap(json["quotas"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -54,5 +56,6 @@ class UserRoles {
             datetimeCreated == null ? null : datetimeCreated.toIso8601String(),
         "datetime_updated":
             datetimeUpdated == null ? null : datetimeUpdated.toIso8601String(),
+        "quotas": quotas == null ? null : quotas.toMap(),
       };
 }
