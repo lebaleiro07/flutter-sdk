@@ -23,7 +23,7 @@ class AuthEndpoint {
   static String logout(String deviceToken) =>
       "$_apiHost/v1/auth/signout?device_token=$deviceToken";
 
-  static String forgotPassword(String email) => "$_apiHost/v3/auth/forgot-password/$email?isMobile=true";
+  static String forgotPassword(String email) => "$_apiHost/v3/auth/forgot-password/$email";
 
   static String resetPassword = "$_apiHost/v3/auth/reset-password?isMobile=true";
 
