@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:math';
 
-import 'package:music_playce_sdk/core/api/models/users/user_pictures.dart';
+import 'package:music_playce_sdk/core/api/models/users/picture.model.dart';
 import 'package:music_playce_sdk/core/api/models/users/follows.dart';
 import 'package:music_playce_sdk/core/api/models/users/user_roles.model.dart';
 
@@ -42,7 +41,8 @@ class User {
   bool isArtist;
   DateTime profileDatetimeCreated;
   DateTime profileDatetimeUpdated;
-  UserPictures userPictures;
+  Picture pictureProfile;
+  Picture pictureCover;
   String email;
   String phone;
 
@@ -83,7 +83,8 @@ class User {
     this.isArtist,
     this.profileDatetimeCreated,
     this.profileDatetimeUpdated,
-    this.userPictures,
+    this.pictureCover,
+    this.pictureProfile,
     this.email,
     this.phone,
   });
@@ -186,9 +187,12 @@ class User {
         profileDatetimeUpdated: json["profile_datetime_updated"] == null
             ? null
             : DateTime.parse(json["profile_datetime_updated"]),
-        userPictures: json["picture"] == null
+        pictureProfile: json["picture_profile"] == null
             ? null
-            : UserPictures.fromMap(json["picture"]),
+            : Picture.fromMap(json["picture_profile"]),
+        pictureCover: json["picture_cover"] == null
+            ? null
+            : Picture.fromMap(json["picture_cover"]),
         email: json["email"] == null ? null : json["email"],
         phone: json["phone"] == null ? null : json["phone"],
       );
@@ -240,7 +244,9 @@ class User {
         "profile_datetime_updated": profileDatetimeUpdated == null
             ? null
             : profileDatetimeUpdated.toIso8601String(),
-        "picture": userPictures == null ? null : userPictures.toMap(),
+        "picture_profile":
+            pictureProfile == null ? null : pictureProfile.toMap(),
+        "picture_cover": pictureCover == null ? null : pictureCover.toMap(),
         "email": email == null ? null : email,
         "phone": phone == null ? null : phone,
       };
