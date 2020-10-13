@@ -8,7 +8,8 @@ class UserEndpoint {
 
   static final _apiHost = _env.get(EnvironmentKeys.apiHost);
 
-  static String getUser(String userId) => "$_apiHost/v2/users/user-and-profile/$userId";
+  static String getUser(String userId) =>
+      "$_apiHost/v2/users/user-and-profile/$userId";
 
   static String updateUser(String userId) => "$_apiHost/v1/users/$userId";
 
@@ -30,6 +31,6 @@ class UserEndpoint {
 
   static String getTerm(String name) => "$_apiHost/v1/terms/$name";
 
-  static String getAllUsersByName(String name) => "$_apiHost/v1/users/find/$name";
-
+  static String getAllUsersByName(String name) =>
+      "$_apiHost/v2/users/find-by-name/$name";
 }
