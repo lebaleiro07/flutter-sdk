@@ -29,7 +29,7 @@ class UserRepositoryImpl implements UserRepository {
       UserEndpoint.getUser(userId),
     );
 
-    return User.fromMap(jsonDecode(response?.body));
+    return User.fromMap(jsonDecode(response?.body)['data']);
   }
 
   @override
