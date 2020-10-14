@@ -13,15 +13,6 @@ class UserEndpoint {
 
   static String updateUser(String userId) => "$_apiHost/v1/users/$userId";
 
-  static String getUserLikes(String userId) =>
-      "$_apiHost/v1/users/$userId/likes";
-
-  static String followUser(String userId) =>
-      "$_apiHost/v1/users/$userId/follow";
-
-  static String unfollowUser(String userId) =>
-      "$_apiHost/v1/users/$userId/follow";
-
   static String getAllUserPlaylists(String userId) =>
       "$_apiHost/v1/users/$userId/playlists";
 
