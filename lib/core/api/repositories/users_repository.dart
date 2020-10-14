@@ -5,8 +5,6 @@ import '../models/users/user_update_response.model.dart';
 import '../endpoints/user_endpoint.dart';
 import '../models/cursor.dart';
 import '../models/users/term.dart';
-import '../models/users/user_follow_response.model.dart';
-import '../models/users/user_likes_response.model.dart';
 import '../models/users/user_playlists_response.model.dart';
 import '../models/users/user_response.model.dart';
 
@@ -31,34 +29,8 @@ abstract class UserRepository {
   ///
   /// It returns a [UserUpdateResponse] object, that is the
   /// updated object
-  Future<UserUpdateResponse> updateUser(UserUpdateRequest userUpdateRequest, String userId);
-
-  /// Sends a HTTP request to the user endpoint in order to
-  /// get all user's likes by his ID
-  ///
-  /// The request is made to [UserEndpoint.getUserLikes]
-  /// It receive a [String] that is a [userId]
-  ///
-  /// It returns a [User] object
-  Future<UserLikesResponse> getUserLikes(String userId);
-
-  /// Sends an HTTP request to the user endpoint in order to
-  /// follow a specific user by his ID
-  ///
-  /// The request is made to [UserEndpoint.followUser]
-  /// It receive a [String] that is a [userId]
-  ///
-  /// It returns a [UserFollowResponse] object
-  Future<UserFollowResponse> followUser(String userId);
-
-  /// Sends an HTTP request to the user endpoint in order to
-  /// unfollow a specific user by his ID
-  ///
-  /// The request is made to [UserEndpoint.unfollowUser]
-  /// It receive a [String] that is a [userId]
-  ///
-  /// It returns a [UserFollowResponse] object
-  Future<UserFollowResponse> unfollowUser(String userId);
+  Future<UserUpdateResponse> updateUser(
+      UserUpdateRequest userUpdateRequest, String userId);
 
   /// Sends an HTTP request to the user endpoint in order to
   /// get all playlists from a specific user by his ID
