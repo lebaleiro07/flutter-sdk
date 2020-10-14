@@ -6,12 +6,9 @@ import 'package:music_playce_sdk/core/api/models/users/user_update_request.dart'
 
 import '../../../http/music_playce_http.dart';
 import '../../models/users/user_update_response.model.dart';
-import '../../endpoints/search_endpoint.dart';
 import '../../endpoints/user_endpoint.dart';
 import '../../models/cursor.dart';
 import '../../models/users/term.dart';
-import '../../models/users/user_follow_response.model.dart';
-import '../../models/users/user_likes_response.model.dart';
 import '../../models/users/user_playlists_response.model.dart';
 import '../../models/users/user_response.model.dart';
 import '../users_repository.dart';
