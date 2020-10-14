@@ -19,9 +19,7 @@ import '../users_repository.dart';
 class UserRepositoryImpl implements UserRepository {
   final MusicPlayceHttp httpClient;
 
-  UserRepositoryImpl({
-    @required this.httpClient
-  });
+  UserRepositoryImpl({@required this.httpClient});
 
   @override
   Future<User> getUser(String userId) async {
@@ -33,56 +31,28 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<UserUpdateResponse> updateUser(UserUpdateRequest userUpdateRequest, String userId) async {
-    final response = await httpClient.put(
-      UserEndpoint.updateUser(userId),
-      body: {
-        "name": userUpdateRequest.name,
-        "description": userUpdateRequest.description,
-        "location": userUpdateRequest.location,
-        "phone": userUpdateRequest.phone,
-        "id_picture_cover": userUpdateRequest.idPictureCover,
-        "id_picture_profile":userUpdateRequest.idPictureProfile,
-      }
-    );
+  Future<UserUpdateResponse> updateUser(
+      UserUpdateRequest userUpdateRequest, String userId) async {
+    final response =
+        await httpClient.put(UserEndpoint.updateUser(userId), body: {
+      "name": userUpdateRequest.name,
+      "description": userUpdateRequest.description,
+      "location": userUpdateRequest.location,
+      "phone": userUpdateRequest.phone,
+      "id_picture_cover": userUpdateRequest.idPictureCover,
+      "id_picture_profile": userUpdateRequest.idPictureProfile,
+    });
 
     return UserUpdateResponse.fromMap(jsonDecode(response?.body)['data']);
   }
 
   @override
-  Future<UserLikesResponse> getUserLikes(String userId) async {
-    final response = await httpClient.get(
-      UserEndpoint.getUserLikes(userId),
-    );
-
-    return UserLikesResponse.fromJson(jsonDecode(response?.body)['data']);
-  }
-
-  @override
-  Future<UserFollowResponse> followUser(String userId) async {
-    final response = await httpClient.put(
-      UserEndpoint.followUser(userId),
-    );
-
-    return UserFollowResponse.fromJson(jsonDecode(response?.body)['data']);
-  }
-
-  @override
-  Future<UserFollowResponse> unfollowUser(String userId) async {
-    final response = await httpClient.put(
-      UserEndpoint.unfollowUser(userId),
-    );
-
-    return UserFollowResponse.fromJson(jsonDecode(response?.body)['data']);
-  }
-
-  @override
-  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists({ String userId, String page, int limit = 12 }) async{
+  Future<DataWithCursor<UserPlaylists>> getAllUserPlaylists(
+      {String userId, String page, int limit = 12}) async {
     try {
       final response = await httpClient.get(
-          "${UserEndpoint.getAllUserPlaylists(userId)}?limit=$limit" + (page != null ? "&page=$page" : "")
-
-      );
+          "${UserEndpoint.getAllUserPlaylists(userId)}?limit=$limit" +
+              (page != null ? "&page=$page" : ""));
 
       final data = jsonDecode(response.body);
 
@@ -93,60 +63,55 @@ class UserRepositoryImpl implements UserRepository {
       final cursor = jsonDecode(response?.body)['cursor'];
 
       return DataWithCursor<UserPlaylists>(
-        cursor: Cursor.fromMap(cursor),
-        data: list
-      );
+          cursor: Cursor.fromMap(cursor), data: list);
     } catch (e, s) {
       print("$e $s");
     }
   }
 
   @override
-  Future<Either<Exception, List<User>>> search(String query, { int limit = 5 }) async {
+  Future<Either<Exception, List<User>>> search(String query,
+      {int limit = 5}) async {
     try {
-      final response = await httpClient.get(
-        "${UserEndpoint.getAllUsersByName(query)}?limit=$limit"
-      );
+      final response = await httpClient
+          .get("${UserEndpoint.getAllUsersByName(query)}?limit=$limit");
 
       final json = jsonDecode(response?.body)['data'];
 
-      final users = json.map<User>((user) => User.fromMap(user))
-        .toList();
+      final users = json.map<User>((user) => User.fromMap(user)).toList();
 
       return right(users);
-    } catch(e) {
+    } catch (e) {
       print(e);
       return left(e);
     }
   }
 
   @override
-  Future<Either<Exception, dynamic>> checkEmail(String email) async{
+  Future<Either<Exception, dynamic>> checkEmail(String email) async {
     try {
-      final response = await httpClient.post(UserEndpoint.checkEmail, body: {
-        "email": email
-      });
+      final response = await httpClient
+          .post(UserEndpoint.checkEmail, body: {"email": email});
 
       final data = jsonDecode(response?.body)['data'];
 
       return right(data);
-    } catch(e, s) {
+    } catch (e, s) {
       print("$e $s");
       return left(e);
     }
   }
-  
+
   @override
-  Future<Either<Exception, dynamic>> checkPhone(String phone) async{
+  Future<Either<Exception, dynamic>> checkPhone(String phone) async {
     try {
-      final response = await httpClient.post(UserEndpoint.checkPhone, body: {
-        "phone": phone
-      });
+      final response = await httpClient
+          .post(UserEndpoint.checkPhone, body: {"phone": phone});
 
       final data = jsonDecode(response?.body)['data'];
 
       return right(data);
-    } catch(e) {
+    } catch (e) {
       return left(e);
     }
   }
@@ -161,7 +126,7 @@ class UserRepositoryImpl implements UserRepository {
       final term = Term.fromJson(data);
 
       return right(term);
-    } catch(e) {
+    } catch (e) {
       return left(e);
     }
   }
@@ -172,17 +137,11 @@ class UserRepositoryImpl implements UserRepository {
 
     final endUserAgreement = await getTerm('end-user-agreement');
 
-    endUserAgreement.fold(
-      (err) => left(err),
-      (success) => terms.add(success)
-    );
+    endUserAgreement.fold((err) => left(err), (success) => terms.add(success));
 
     final privacyPolicy = await getTerm('privacy-policy');
 
-    privacyPolicy.fold(
-      (err) => left(err),
-      (success) => terms.add(success)
-    );
+    privacyPolicy.fold((err) => left(err), (success) => terms.add(success));
 
     return right(terms);
   }
